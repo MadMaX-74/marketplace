@@ -5,10 +5,18 @@ pluginManagement {
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
-}
 rootProject.name = "marketplace"
 
-include("m1-init")
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libraries") {
+            from(files("gradle/libraries.versions.toml"))
+        }
+    }
+}
+
+
+include("plugin")
+include("training-modules")
+include("project-modules")
 
