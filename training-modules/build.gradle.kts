@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation(libraries.kotlin.stdlib)
-    testImplementation(libraries.junit.jupiter)
+    implementation(librariesCatalog.kotlin.stdlib)
+    testImplementation(librariesCatalog.junit.jupiter)
 }
 
 tasks.test {

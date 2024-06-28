@@ -7,9 +7,10 @@ pluginManagement {
 
 rootProject.name = "marketplace"
 
+
 dependencyResolutionManagement {
     versionCatalogs {
-        create("libraries") {
+        create("librariesCatalog") {
             from(files("gradle/libraries.versions.toml"))
         }
     }
