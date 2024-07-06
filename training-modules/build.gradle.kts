@@ -1,6 +1,5 @@
-
 plugins {
-    kotlin("jvm") version "2.0.0"
+    kotlin("jvm")
 }
 
 group = "com.otus.otuskotlin.marketplace"
@@ -18,7 +17,6 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
-
 kotlin {
     jvmToolchain(21)
 }
