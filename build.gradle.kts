@@ -1,6 +1,6 @@
-
 plugins {
-    kotlin("jvm") version "2.0.0"
+    alias(librariesCatalog.plugins.kotlin.jvm) apply false
+    alias(librariesCatalog.plugins.kotlin.multiplatform) apply false
 }
 
 group = "com.otus.otuskotlin.marketplace"
@@ -10,15 +10,10 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation(librariesCatalog.kotlin.stdlib)
-    testImplementation(librariesCatalog.junit.jupiter)
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(21)
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    group = rootProject.group
+    version = rootProject.version
 }

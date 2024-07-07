@@ -5,16 +5,19 @@ pluginManagement {
     }
 }
 
-rootProject.name = "marketplace"
-
-includeBuild("build-plugin")
-includeBuild("training-modules")
-includeBuild("todo-projects")
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
+rootProject.name = "training-modules"
 
 dependencyResolutionManagement {
     versionCatalogs {
         create("librariesCatalog") {
-            from(files("gradle/libraries.versions.toml"))
+            from(files("../gradle/libraries.versions.toml"))
         }
     }
 }
+
+include("test-lesson")
+
+
