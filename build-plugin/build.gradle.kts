@@ -1,22 +1,11 @@
 plugins {
-    kotlin("jvm")
-    `java-gradle-plugin`
+    `kotlin-dsl`
 }
-
-group = "com.otus.otuskotlin.marketplace"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation(librariesCatalog.kotlin.stdlib)
-    testImplementation(librariesCatalog.junit.jupiter)
-}
-kotlin {
-    jvmToolchain(21)
-}
 gradlePlugin {
     plugins {
         create("jvmPlugin") {
@@ -29,10 +18,10 @@ gradlePlugin {
         }
     }
 }
-sourceSets {
-    main {
-        kotlin {
-            srcDir("src/main/kotlin")
-        }
-    }
+
+dependencies {
+    implementation(files(librariesCatalog.javaClass.superclass.protectionDomain.codeSource.location))
+
+    implementation(librariesCatalog.plugin.kotlin)
+    implementation(librariesCatalog.plugin.binaryCompatibilityValidator)
 }
