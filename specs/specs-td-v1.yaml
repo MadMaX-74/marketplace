@@ -1,0 +1,267 @@
+openapi: 3.0.4
+info:
+  title: "Planner App ${VERSION_APP}"
+  description: This is a place where you can plan your stuff
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1
+tags:
+  - name: td
+    description: Планер ваших дел
+paths:
+  /td/create:
+    post:
+      tags:
+        - td
+      summary: Create Task
+      operationId: createTask
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponseSingle'
+
+  /td/list:
+    post:
+      tags:
+        - td
+      summary: Get List of Tasks
+      operationId: getListOfTasks
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponseMulti'
+
+  /td/task:
+    post:
+      tags:
+        - td
+      summary: Get Task
+      operationId: getTask
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskIdRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponseSingle'
+
+  /td/update:
+    post:
+      tags:
+        - td
+      summary: Update Task
+      operationId: updateTask
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponseSingle'
+
+  /td/delete:
+    post:
+      tags:
+        - td
+      summary: Delete Task
+      operationId: deleteTask
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskIdRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+
+  /td/status:
+    patch:
+      tags:
+        - td
+      summary: Update Task Status
+      operationId: updateTaskStatus
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskStatusUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponseSingle'
+
+  /td/report:
+    get:
+      tags:
+        - td
+      summary: Report WebSocket
+      operationId: reportWebSocket
+      responses:
+        101:
+          description: Switching Protocols
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSocketResponse'
+
+components:
+  schemas:
+    TaskCreateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - title
+        - description
+
+    TaskUpdateRequest:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        completedDate:
+          type: string
+          format: date-time
+      required:
+        - id
+
+    TaskStatusUpdateRequest:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        status:
+          type: string
+      required:
+        - id
+        - status
+
+    TaskIdRequest:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+      required:
+        - id
+
+    DeleteResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    TaskId:
+      type: string
+      description: Уникальный идентификатор задачи
+
+    TaskResponseObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        completedDate:
+          type: string
+          format: date-time
+
+    TaskResponseSingle:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskResponseMulti:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            tasks:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskResponseObject'
+
+    WebSocketResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    IResponse:
+      type: object
+      properties:
+        responseType:
+          type: string
+        result:
+          type: string
+          enum:
+            - success
+            - error
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
