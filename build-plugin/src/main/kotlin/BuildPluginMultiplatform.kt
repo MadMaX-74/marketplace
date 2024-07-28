@@ -1,4 +1,4 @@
-package ru.otus
+package ru.otus.otuskotlin.marketplace.plugin
 
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -44,8 +44,10 @@ private fun KotlinMultiplatformExtension.configureTargets(project: Project) {
     }
 
     jvm {
-        compilerOptions.apply {
-            jvmTarget.set(JvmTarget.valueOf("JVM_${libs.versions.jvm.compiler.get()}"))
+        compilations.configureEach {
+            compilerOptions.configure {
+                jvmTarget.set(JvmTarget.valueOf("JVM_${libs.versions.jvm.compiler.get()}"))
+            }
         }
     }
     linuxX64()

@@ -1,6 +1,6 @@
 plugins {
-    alias(librariesCatalog.plugins.kotlin.jvm)
-    alias(librariesCatalog.plugins.openapi.generator)
+    id("build-jvm")
+    alias(libs.plugins.openapi.generator)
 }
 
 sourceSets {
@@ -42,10 +42,10 @@ openApiGenerate {
 }
 
 dependencies {
-    implementation(librariesCatalog.kotlin.stdlib)
-    implementation(librariesCatalog.jackson.kotlin)
-    implementation(librariesCatalog.jackson.datatype)
-    testImplementation(librariesCatalog.junit.jupiter)
+    implementation(kotlin("stdlib"))
+    implementation(libs.jackson.kotlin)
+    implementation(libs.jackson.datatype)
+    testImplementation(libs.junit.jupiter)
 }
 
 

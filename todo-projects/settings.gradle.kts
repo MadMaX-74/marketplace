@@ -2,8 +2,8 @@ rootProject.name = "todo-projects"
 
 dependencyResolutionManagement {
     versionCatalogs {
-        create("librariesCatalog") {
-            from(files("../gradle/libraries.versions.toml"))
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
         }
     }
 }
@@ -25,7 +25,8 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
-include("todo-service")
-include("todo-projects-api-v1")
+include(":todo-service")
+include(":todo-projects-api-v1")
+include(":todo-projects-common")
 
 
