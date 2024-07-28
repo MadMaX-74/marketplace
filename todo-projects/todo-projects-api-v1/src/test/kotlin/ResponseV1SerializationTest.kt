@@ -1,6 +1,7 @@
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 import com.fasterxml.jackson.module.kotlin.readValue
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import ru.otus.todoprojects.api.v1.apiV1Mapper
 import ru.otus.todoprojects.api.v1.models.*
 

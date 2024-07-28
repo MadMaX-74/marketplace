@@ -1,4 +1,4 @@
-rootProject.name = "todoprojects"
+rootProject.name = "todo-projects"
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -27,6 +27,7 @@ plugins {
 
 include(":todo-service")
 include(":todo-projects-api-v1")
+include(":todo-projects-mapper")
 include(":todo-projects-common")
 
 

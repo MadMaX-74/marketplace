@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
 }
 
-group = "ru.otus.todoprojects"
+group = "ru.otus.todo"
 version = "1.0.0"
 
 allprojects {

@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.common.stubs
+package stubs
 
 enum class TodoStubs {
     NONE,
@@ -6,9 +6,5 @@ enum class TodoStubs {
     NOT_FOUND,
     BAD_ID,
     BAD_TITLE,
-    BAD_DESCRIPTION,
-    BAD_VISIBILITY,
     CANNOT_DELETE,
-    BAD_SEARCH_STRING,
-    DB_ERROR,
 }

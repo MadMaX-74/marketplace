@@ -2,8 +2,8 @@ plugins {
     id("build-kmp")
 }
 
-group = rootProject.group
-version = rootProject.version
+group = "ru.otus.todoprojects"
+version = "1.0.0"
 
 kotlin {
     sourceSets {
