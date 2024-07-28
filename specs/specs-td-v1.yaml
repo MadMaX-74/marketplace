@@ -1,23 +1,20 @@
 openapi: 3.0.4
 info:
-  title: "Planner App ${VERSION_APP}"
-  description: This is a place where you can plan your stuff
-  license:
-    name: Apache 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: "Planner API"
+  description: This is the API for the Planner application
   version: 1.0.0
 servers:
   - url: http://localhost:8080/v1
 tags:
-  - name: td
-    description: Планер ваших дел
+  - name: task
+    description: Task management
 paths:
-  /td/create:
+  /task/create:
     post:
       tags:
-        - td
-      summary: Create Task
-      operationId: createTask
+        - task
+      summary: Create task
+      operationId: taskCreate
       requestBody:
         description: Request body
         content:
@@ -31,34 +28,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskResponseSingle'
-
-  /td/list:
+                $ref: '#/components/schemas/TaskCreateResponse'
+  /task/read:
     post:
       tags:
-        - td
-      summary: Get List of Tasks
-      operationId: getListOfTasks
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskResponseMulti'
-
-  /td/task:
-    post:
-      tags:
-        - td
-      summary: Get Task
-      operationId: getTask
+        - task
+      summary: Read task
+      operationId: taskRead
       requestBody:
         description: Request body
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TaskIdRequest'
+              $ref: '#/components/schemas/TaskReadRequest'
         required: true
       responses:
         200:
@@ -66,14 +48,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskResponseSingle'
-
-  /td/update:
+                $ref: '#/components/schemas/TaskReadResponse'
+  /task/update:
     post:
       tags:
-        - td
-      summary: Update Task
-      operationId: updateTask
+        - task
+      summary: Update task
+      operationId: taskUpdate
       requestBody:
         description: Request body
         content:
@@ -87,20 +68,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskResponseSingle'
-
-  /td/delete:
+                $ref: '#/components/schemas/TaskUpdateResponse'
+  /task/delete:
     post:
       tags:
-        - td
-      summary: Delete Task
-      operationId: deleteTask
+        - task
+      summary: Delete task
+      operationId: taskDelete
       requestBody:
         description: Request body
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TaskIdRequest'
+              $ref: '#/components/schemas/TaskDeleteRequest'
         required: true
       responses:
         200:
@@ -108,20 +88,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteResponse'
-
-  /td/status:
-    patch:
+                $ref: '#/components/schemas/TaskDeleteResponse'
+  /task/list:
+    post:
       tags:
-        - td
-      summary: Update Task Status
-      operationId: updateTaskStatus
+        - task
+      summary: List tasks
+      operationId: taskList
       requestBody:
         description: Request body
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TaskStatusUpdateRequest'
+              $ref: '#/components/schemas/TaskListRequest'
         required: true
       responses:
         200:
@@ -129,100 +108,111 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskResponseSingle'
-
-  /td/report:
+                $ref: '#/components/schemas/TaskListResponse'
+  /task/report:
     get:
       tags:
-        - td
-      summary: Report WebSocket
-      operationId: reportWebSocket
+        - task
+      summary: Report task status over WebSocket
+      operationId: taskReport
       responses:
-        101:
-          description: Switching Protocols
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/WebSocketResponse'
-
+        200:
+          description: WebSocket handshake response
 components:
   schemas:
-    TaskCreateRequest:
+    IRequest:
       type: object
+      description: Базовый интерфейс для всех запросов
       properties:
-        title:
+        requestType:
           type: string
-        description:
-          type: string
-      required:
-        - title
-        - description
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+      discriminator:
+        propertyName: requestType
+        mapping:
+          create: '#/components/schemas/TaskCreateRequest'
+          read: '#/components/schemas/TaskReadRequest'
+          update: '#/components/schemas/TaskUpdateRequest'
+          delete: '#/components/schemas/TaskDeleteRequest'
+          list: '#/components/schemas/TaskListRequest'
+          report: '#/components/schemas/TaskReportRequest'
 
-    TaskUpdateRequest:
+    IResponse:
       type: object
+      description: Базовый интерфейс для всех ответов
       properties:
-        id:
-          $ref: '#/components/schemas/TaskId'
-        title:
+        responseType:
           type: string
-        description:
-          type: string
-        status:
-          type: string
-        completedDate:
-          type: string
-          format: date-time
-      required:
-        - id
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+        result:
+          $ref: '#/components/schemas/ResponseResult'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      discriminator:
+        propertyName: responseType
+        mapping:
+          create: '#/components/schemas/TaskCreateResponse'
+          read: '#/components/schemas/TaskReadResponse'
+          update: '#/components/schemas/TaskUpdateResponse'
+          delete: '#/components/schemas/TaskDeleteResponse'
+          list: '#/components/schemas/TaskListResponse'
+          report: '#/components/schemas/TaskReportResponse'
 
-    TaskStatusUpdateRequest:
+    ResponseResult:
+      type: string
+      enum:
+        - success
+        - error
+
+    Error:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/TaskId'
-        status:
+        code:
           type: string
-      required:
-        - id
-        - status
-
-    TaskIdRequest:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/TaskId'
-      required:
-        - id
-
-    DeleteResponse:
-      type: object
-      properties:
+        group:
+          type: string
+        field:
+          type: string
         message:
           type: string
 
     TaskId:
       type: string
-      description: Уникальный идентификатор задачи
+      description: Идентификатор задачи
 
-    TaskResponseObject:
+    TaskStatus:
+      type: string
+      description: Статус задачи
+      enum:
+        - in_progress
+        - completed
+
+    TaskCreateObject:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/TaskId'
         title:
           type: string
+          description: Название задачи
         description:
           type: string
+          description: Описание задачи
         status:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-        completedDate:
-          type: string
-          format: date-time
+          $ref: '#/components/schemas/TaskStatus'
 
-    TaskResponseSingle:
+    TaskCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskCreateObject'
+
+    TaskCreateResponse:
       allOf:
         - $ref: '#/components/schemas/IResponse'
         - type: object
@@ -230,7 +220,28 @@ components:
             task:
               $ref: '#/components/schemas/TaskResponseObject'
 
-    TaskResponseMulti:
+    TaskReadRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TaskId'
+
+    TaskReadResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskListRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+
+    TaskListResponse:
       allOf:
         - $ref: '#/components/schemas/IResponse'
         - type: object
@@ -240,28 +251,107 @@ components:
               items:
                 $ref: '#/components/schemas/TaskResponseObject'
 
-    WebSocketResponse:
+    TaskUpdateObject:
       type: object
       properties:
-        message:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
           type: string
+          description: Название задачи
+        description:
+          type: string
+          description: Описание задачи
+        status:
+          $ref: '#/components/schemas/TaskStatus'
 
-    IResponse:
+    TaskUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskUpdateObject'
+
+    TaskUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TaskId'
+
+    TaskDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+
+    TaskReportRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+
+    TaskReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+
+    TaskResponseObject:
       type: object
       properties:
-        responseType:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
           type: string
-        result:
+          description: Название задачи
+        description:
           type: string
-          enum:
-            - success
-            - error
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              message:
-                type: string
+          description: Описание задачи
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        createdDate:
+          type: string
+          format: date-time
+          description: Дата создания задачи
+        completedDate:
+          type: string
+          format: date-time
+          description: Дата завершения задачи (если выполнена)
+
+    TaskDebugMode:
+      type: string
+      enum:
+        - prod
+        - test
+        - stub
+
+    TaskRequestDebug:
+      type: object
+      properties:
+        debug:
+          $ref: '#/components/schemas/TaskDebug'
+
+    TaskDebug:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/TaskDebugMode'
+        stub:
+          $ref: '#/components/schemas/TaskRequestDebugStubs'
+
+    TaskRequestDebugStubs:
+      type: string
+      enum:
+        - success
+        - notFound
+        - badId
+        - badTitle
+        - badDescription
+        - cannotDelete
