@@ -6,6 +6,6 @@ enum class TodoCommand {
     READ,
     UPDATE,
     DELETE,
-    SEARCH,
-    OFFERS,
+    LIST,
+    REPORT
 }

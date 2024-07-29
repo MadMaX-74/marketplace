@@ -2,8 +2,8 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import ru.otus.todo.api.v1.models.*
 import ru.otus.todoprojects.api.v1.apiV1Mapper
-import ru.otus.todoprojects.api.v1.models.*
 
 class ResponseV1SerializationTest {
 

@@ -3,11 +3,11 @@
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import ru.otus.todo.api.v1.models.TaskCreateObject
+import ru.otus.todo.api.v1.models.TaskCreateRequest
+import ru.otus.todo.api.v1.models.TaskStatus
 import ru.otus.todoprojects.api.v1.apiV1RequestDeserialize
 import ru.otus.todoprojects.api.v1.apiV1RequestSerialize
-import ru.otus.todoprojects.api.v1.models.TaskCreateObject
-import ru.otus.todoprojects.api.v1.models.TaskCreateRequest
-import ru.otus.todoprojects.api.v1.models.TaskStatus
 
 class RequestV1SerializationTest {
     private val request = TaskCreateRequest(

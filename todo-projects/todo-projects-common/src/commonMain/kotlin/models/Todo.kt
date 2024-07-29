@@ -9,4 +9,10 @@ data class Todo(
     var status: TodoStatus = TodoStatus.NONE,
     var createdDate: Instant = Instant.DISTANT_PAST,
     var completedDate: Instant? = null
-)
+) {
+    fun isEmpty() = this == NONE
+
+    companion object {
+        private val NONE = Todo()
+    }
+}

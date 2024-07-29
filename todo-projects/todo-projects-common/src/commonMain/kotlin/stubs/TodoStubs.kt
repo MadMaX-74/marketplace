@@ -7,4 +7,6 @@ enum class TodoStubs {
     BAD_ID,
     BAD_TITLE,
     CANNOT_DELETE,
+    BAD_DESCRIPTION,
+    BAD_STATUS
 }
