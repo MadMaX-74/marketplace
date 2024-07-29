@@ -43,9 +43,10 @@ private fun TodoContext.fromTransport(request: TaskCreateRequest) {
 private fun TodoContext.fromTransport(request: TaskReadRequest) {
     command = TodoCommand.READ
     todoRequest = request.id.toTaskWithId()
-    workMode = request.debug.transportToWorkMode()
-    stubCase = request.debug.transportToStubCase()
+    workMode = request.debug?.transportToWorkMode() ?: TodoWorkMode.PROD
+    stubCase = request.debug?.transportToStubCase() ?: TodoStubs.NONE
 }
+
 
 private fun TodoContext.fromTransport(request: TaskUpdateRequest) {
     command = TodoCommand.UPDATE
@@ -69,7 +70,8 @@ private fun TodoContext.fromTransport(request: TaskListRequest) {
 
 // Дополнительные функции для преобразования типов
 private fun String?.toTaskId(): TodoId = this?.let { TodoId(it) } ?: TodoId.NONE
-private fun String?.toTaskWithId(): Todo = Todo(id = this.toTaskId())
+private fun String?.toTaskWithId(): Todo = Todo(id = this.toTaskId().asString())
+
 private fun TaskCreateObject.toInternal(): Todo = Todo(
     title = this.title ?: "",
     description = this.description ?: "",
@@ -77,7 +79,7 @@ private fun TaskCreateObject.toInternal(): Todo = Todo(
 )
 
 private fun TaskUpdateObject.toInternal(): Todo = Todo(
-    id = this.id.toTaskId(),
+    id = this.id.toTaskId().toString(),
     title = this.title ?: "",
     description = this.description ?: "",
     status = this.status?.toInternal() ?: TodoStatus.NONE

@@ -6,7 +6,7 @@ import stubs.TodoStubs
 data class TodoContext(
     var command: TodoCommand = TodoCommand.NONE,
     var state: TodoState = TodoState.NONE,
-    val errors: MutableList<TodoError> = mutableListOf(),
+    val errors: List<TodoError> = mutableListOf(),
 
     var workMode: TodoWorkMode = TodoWorkMode.PROD,
     var stubCase: TodoStubs = TodoStubs.NONE,

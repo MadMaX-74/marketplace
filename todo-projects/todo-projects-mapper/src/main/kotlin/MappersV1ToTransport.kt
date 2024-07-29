@@ -39,7 +39,6 @@ fun TodoContext.toTransportDelete() = TaskDeleteResponse(
     errors = errors.toTransportErrors()
 )
 
-
 fun TodoContext.toTransportList() = TaskListResponse(
     result = state.toResult(),
     errors = errors.toTransportErrors(),
@@ -53,7 +52,7 @@ fun List<Todo>.toTransportTasks(): List<TaskResponseObject>? = this
     .takeIf { it.isNotEmpty() }
 
 private fun Todo.toTransportTask(): TaskResponseObject = TaskResponseObject(
-    id = id.takeIf { it != TodoId.NONE }?.asString(),
+    id = id.takeIf { it != TodoId.NONE.asString() },
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
     status = status.toTransportTask()

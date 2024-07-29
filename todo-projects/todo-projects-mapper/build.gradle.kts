@@ -10,5 +10,10 @@ dependencies {
     implementation(project(":todo-projects-api-v1"))
     implementation(project(":todo-projects-common"))
 
-    testImplementation(kotlin("test-junit"))
+    testImplementation(libs.junit.jupiter)
+}
+tasks{
+    test {
+        useJUnitPlatform()
+    }
 }

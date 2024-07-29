@@ -3,7 +3,7 @@ package models
 import kotlinx.datetime.Instant
 
 data class Todo(
-    var id: TodoId = TodoId.NONE,
+    var id: String = TodoId.NONE.asString(),
     var title: String = "",
     var description: String = "",
     var status: TodoStatus = TodoStatus.NONE,
