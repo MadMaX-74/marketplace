@@ -17,6 +17,6 @@ data class TodoContext(
     var todoFilterRequest: TodoFilter = TodoFilter(),
 
     var todoResponse: Todo = Todo(),
-    var todosResponse: MutableList<Todo> = mutableListOf()
+    var todosResponse: List<Todo> = mutableListOf()
 
     )
