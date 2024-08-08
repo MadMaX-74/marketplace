@@ -2,26 +2,25 @@ plugins {
     `kotlin-dsl`
 }
 
-repositories {
-    mavenCentral()
-}
-
 gradlePlugin {
     plugins {
-        create("jvmPlugin") {
-            id = "ru.otus.jvm-plugin"
-            implementationClass = "ru.otus.JvmPlugin"
+        register("build-jvm") {
+            id = "build-jvm"
+            implementationClass = "ru.otus.otuskotlin.marketplace.plugin.BuildPluginJvm"
         }
-        create("multiplatformPlugin") {
-            id = "ru.otus.multiplatform-plugin"
-            implementationClass = "ru.otus.MultiplatformPlugin"
+        register("build-kmp") {
+            id = "build-kmp"
+            implementationClass = "ru.otus.otuskotlin.marketplace.plugin.BuildPluginMultiplatform"
         }
     }
 }
 
-dependencies {
-    implementation(files(librariesCatalog.javaClass.superclass.protectionDomain.codeSource.location))
+repositories {
+    mavenCentral()
+}
 
-    implementation(librariesCatalog.plugin.kotlin)
-    implementation(librariesCatalog.plugin.binaryCompatibilityValidator)
+dependencies {
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+    implementation(libs.plugin.kotlin)
+    implementation(libs.plugin.binaryCompatibilityValidator)
 }

@@ -1,0 +1,358 @@
+openapi: 3.0.4
+info:
+  title: "Planner API"
+  description: This is the API for the Planner application
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1
+tags:
+  - name: task
+    description: Task management
+paths:
+  /task/create:
+    post:
+      tags:
+        - task
+      summary: Create task
+      operationId: taskCreate
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCreateResponse'
+  /task/read:
+    post:
+      tags:
+        - task
+      summary: Read task
+      operationId: taskRead
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskReadRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskReadResponse'
+  /task/update:
+    post:
+      tags:
+        - task
+      summary: Update task
+      operationId: taskUpdate
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskUpdateResponse'
+  /task/delete:
+    post:
+      tags:
+        - task
+      summary: Delete task
+      operationId: taskDelete
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDeleteResponse'
+  /task/list:
+    post:
+      tags:
+        - task
+      summary: List tasks
+      operationId: taskList
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskListRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskListResponse'
+  /task/report:
+    get:
+      tags:
+        - task
+      summary: Report task status over WebSocket
+      operationId: taskReport
+      responses:
+        200:
+          description: WebSocket handshake response
+components:
+  schemas:
+    IRequest:
+      type: object
+      description: Базовый интерфейс для всех запросов
+      properties:
+        requestType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+      discriminator:
+        propertyName: requestType
+        mapping:
+          create: '#/components/schemas/TaskCreateRequest'
+          read: '#/components/schemas/TaskReadRequest'
+          update: '#/components/schemas/TaskUpdateRequest'
+          delete: '#/components/schemas/TaskDeleteRequest'
+          list: '#/components/schemas/TaskListRequest'
+          report: '#/components/schemas/TaskReportRequest'
+
+    IResponse:
+      type: object
+      description: Базовый интерфейс для всех ответов
+      properties:
+        responseType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+        result:
+          $ref: '#/components/schemas/ResponseResult'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      discriminator:
+        propertyName: responseType
+        mapping:
+          create: '#/components/schemas/TaskCreateResponse'
+          read: '#/components/schemas/TaskReadResponse'
+          update: '#/components/schemas/TaskUpdateResponse'
+          delete: '#/components/schemas/TaskDeleteResponse'
+          list: '#/components/schemas/TaskListResponse'
+          report: '#/components/schemas/TaskReportResponse'
+
+    ResponseResult:
+      type: string
+      enum:
+        - success
+        - error
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        group:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+
+    TaskId:
+      type: string
+      description: Идентификатор задачи
+
+    TaskStatus:
+      type: string
+      description: Статус задачи
+      enum:
+        - in_progress
+        - completed
+
+    TaskCreateObject:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Название задачи
+        description:
+          type: string
+          description: Описание задачи
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+
+    TaskCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskCreateObject'
+
+    TaskCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskReadRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TaskId'
+
+    TaskReadResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskListRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+
+    TaskListResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            tasks:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskUpdateObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
+          type: string
+          description: Название задачи
+        description:
+          type: string
+          description: Описание задачи
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+
+    TaskUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskUpdateObject'
+
+    TaskUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+        - type: object
+          properties:
+            task:
+              $ref: '#/components/schemas/TaskResponseObject'
+
+    TaskDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+        - $ref: '#/components/schemas/TaskRequestDebug'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TaskId'
+
+    TaskDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+
+    TaskReportRequest:
+      allOf:
+        - $ref: '#/components/schemas/IRequest'
+
+    TaskReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/IResponse'
+
+    TaskResponseObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
+          type: string
+          description: Название задачи
+        description:
+          type: string
+          description: Описание задачи
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        createdDate:
+          type: string
+          format: date-time
+          description: Дата создания задачи
+        completedDate:
+          type: string
+          format: date-time
+          description: Дата завершения задачи (если выполнена)
+
+    TaskDebugMode:
+      type: string
+      enum:
+        - prod
+        - test
+        - stub
+
+    TaskRequestDebug:
+      type: object
+      properties:
+        debug:
+          $ref: '#/components/schemas/TaskDebug'
+
+    TaskDebug:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/TaskDebugMode'
+        stub:
+          $ref: '#/components/schemas/TaskRequestDebugStubs'
+
+    TaskRequestDebugStubs:
+      type: string
+      enum:
+        - success
+        - notFound
+        - badId
+        - badTitle
+        - badDescription
+        - cannotDelete
