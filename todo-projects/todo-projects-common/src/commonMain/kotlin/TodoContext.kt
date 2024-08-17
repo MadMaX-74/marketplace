@@ -6,7 +6,7 @@ import stubs.TodoStubs
 data class TodoContext(
     var command: TodoCommand = TodoCommand.NONE,
     var state: TodoState = TodoState.NONE,
-    val errors: List<TodoError> = mutableListOf(),
+    val errors: MutableList<TodoError> = mutableListOf(),
 
     var workMode: TodoWorkMode = TodoWorkMode.PROD,
     var stubCase: TodoStubs = TodoStubs.NONE,
@@ -17,6 +17,6 @@ data class TodoContext(
     var todoFilterRequest: TodoFilter = TodoFilter(),
 
     var todoResponse: Todo = Todo(),
-    var todosResponse: List<Todo> = mutableListOf()
+    var todosResponse: MutableList<Todo> = mutableListOf()
 
     )

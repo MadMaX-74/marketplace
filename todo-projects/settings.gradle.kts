@@ -30,5 +30,8 @@ include(":todo-projects-mapper")
 include(":todo-projects-common")
 
 include(":todo-projects-stubs")
+include(":todo-projects-biz")
+
+include(":todo-projects-app-common")
 
 
