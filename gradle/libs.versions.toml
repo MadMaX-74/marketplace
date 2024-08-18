@@ -20,6 +20,7 @@ kermit = "2.0.3"
 
 #Frameworks
 ktor = "2.3.9"
+spring-boot = "3.2.0"
 
 # Docker
 testcontainers = "1.19.7"
@@ -74,6 +75,12 @@ ktor-server-negotiation = { module = "io.ktor:ktor-server-content-negotiation", 
 ktor-server-calllogging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
 ktor-server-test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 
+# Spring
+spring-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+spring-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version = "2.3.0" }
+spring-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+
 # Testing
 kotest-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotest-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
@@ -95,6 +102,11 @@ kotlinx-serialization = {id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 # Ktor
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+
+# Spring
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependencies = { id = "io.spring.dependency-management", version = "1.1.4" }
+spring-kotlin = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 
 # Docker
 muschko-remote = { id = "com.bmuschko.docker-remote-api", version.ref = "muschko" }

@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.stubs
+package ru.otus.todo.stubs
 
 import kotlinx.datetime.Instant
 import models.Todo

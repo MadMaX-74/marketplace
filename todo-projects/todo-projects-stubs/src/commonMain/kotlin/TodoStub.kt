@@ -1,10 +1,10 @@
-package ru.otus.otuskotlin.marketplace.stubs
+package ru.otus.todo.stubs
 
 import kotlinx.datetime.Clock
 import models.Todo
 import models.TodoId
 import models.TodoStatus
-import ru.otus.otuskotlin.marketplace.stubs.TodoStubTask.TASK_IN_PROGRESS
+import ru.otus.todo.stubs.TodoStubTask.TASK_IN_PROGRESS
 
 
 object TodoStub {
@@ -15,10 +15,7 @@ object TodoStub {
     fun prepareTaskList(status: TodoStatus) = listOf(
         todoTask("task-001", status),
         todoTask("task-002", status),
-        todoTask("task-003", status),
-        todoTask("task-004", status),
-        todoTask("task-005", status),
-        todoTask("task-006", status),
+        todoTask("task-003", status)
     )
 
     private fun todoTask(id: String, status: TodoStatus) = Todo(

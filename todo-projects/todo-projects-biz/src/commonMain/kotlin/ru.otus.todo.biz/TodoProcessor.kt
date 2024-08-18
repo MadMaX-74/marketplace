@@ -4,7 +4,7 @@ import TodoContext
 import TodoCorSettings
 import models.TodoState
 import models.TodoStatus
-import ru.otus.otuskotlin.marketplace.stubs.TodoStub
+import ru.otus.todo.stubs.TodoStub
 
 
 @Suppress("unused", "RedundantSuspendModifier")

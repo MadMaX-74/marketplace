@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.mappers.v1
+package ru.otus.todo.mapper
 
 import TodoContext
 import models.*
