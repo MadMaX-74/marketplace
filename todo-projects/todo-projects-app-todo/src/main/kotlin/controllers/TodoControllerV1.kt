@@ -43,9 +43,7 @@ class TodoControllerV1(
             clazz: KClass<*>,
             logId: String,
         ): R = appSettings.controllerHelper(
-            {
-                fromTransport(request)
-            },
+            { fromTransport(request) },
             { toTransportTodo() as R },
             clazz,
             logId
