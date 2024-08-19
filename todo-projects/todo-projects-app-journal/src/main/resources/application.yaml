@@ -1,0 +1,13 @@
+ktor:
+  deployment:
+    port: 8081
+    host: "0.0.0.0"
+  application:
+    modules:
+      - ru.otus.todo.app.journal.ApplicationKt.module
+  server:
+    type: netty
+
+rabbitmq:
+  host: "localhost"
+  queueName: "task_queue"

@@ -34,5 +34,6 @@ include(":todo-projects-biz")
 
 include(":todo-projects-app-common")
 include(":todo-projects-app-todo")
+include(":todo-projects-app-journal")
 
 
