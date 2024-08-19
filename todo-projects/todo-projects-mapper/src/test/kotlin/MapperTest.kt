@@ -78,7 +78,9 @@ class MapperTest {
                 mode = TaskDebugMode.TEST,
                 stub = TaskRequestDebugStubs.BAD_ID
             ),
-            id = "12345"
+            task = TaskReadObject(
+                id = "12345"
+            )
         )
 
         val expected = TodoContext(
@@ -190,7 +192,9 @@ class MapperTest {
                 mode = TaskDebugMode.TEST,
                 stub = TaskRequestDebugStubs.NOT_FOUND
             ),
-            id = "12345"
+            task = TaskDeleteObject(
+                id = "12345"
+            )
         )
 
         val expected = TodoContext(

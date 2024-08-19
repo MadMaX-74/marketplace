@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v1/task/create"
+  },
+
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "responseType": "create",
+      "result": "success",
+      "task": {
+        "id": "123",
+        "title": "{{{jsonPath request.body '$.task.title'}}}",
+        "description": "task description",
+        "status": "{{{jsonPath request.body '$.task.status'}}}",
+        "createdDate": "{{{jsonPath request.body '$.task.createdDate'}}}",
+        "completedDate": "{{{jsonPath request.body '$.task.completedDate'}}}"
+      }
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "transformers": ["response-template"]
+  }
+}

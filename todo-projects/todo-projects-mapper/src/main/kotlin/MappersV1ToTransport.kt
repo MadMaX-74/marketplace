@@ -36,7 +36,7 @@ fun TodoContext.toTransportUpdate() = TaskUpdateResponse(
 
 fun TodoContext.toTransportDelete() = TaskDeleteResponse(
     result = state.toResult(),
-    errors = errors.toTransportErrors()
+    errors = errors.toTransportErrors(),
 )
 
 fun TodoContext.toTransportList() = TaskListResponse(

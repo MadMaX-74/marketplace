@@ -13,3 +13,4 @@ rootProject.name = "ru.otus"
 
 //includeBuild("training-modules")
 includeBuild("todo-projects")
+includeBuild("todo-projects-tests")
