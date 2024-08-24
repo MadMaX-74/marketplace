@@ -19,6 +19,8 @@ dependencies {
     implementation(libs.coroutines.reactive)
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)
+    // RabbitMQ
+    implementation("org.springframework.boot:spring-boot-starter-amqp")
 
     // Внутренние модели
     implementation(project(":todo-projects-common"))
@@ -33,7 +35,8 @@ dependencies {
 
     // tests
     testImplementation(kotlin("test-junit5"))
-    testImplementation(libs.spring.test)
+    testImplementation(libs.testcontainers.core)
+    testImplementation(libs.testcontainers.rabbitmq)
     testImplementation(libs.mockito.kotlin)
 
     // stubs

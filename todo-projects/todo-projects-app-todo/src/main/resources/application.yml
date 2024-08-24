@@ -13,6 +13,11 @@ management:
 spring:
   jackson:
     default-property-inclusion: non_null
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 springdoc:
   api-docs:
@@ -22,3 +27,4 @@ springdoc:
     urls:
       - name: v1
         url: specs-td-v1.yaml
+

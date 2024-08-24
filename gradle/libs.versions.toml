@@ -89,6 +89,7 @@ kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest"
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version = "5.2.1" }
 
 testcontainers-core = { module = "org.testcontainers:testcontainers", version.ref = "testcontainers" }
+testcontainers-rabbitmq = { module = "org.testcontainers:rabbitmq", version.ref = "testcontainers" }
 
 [bundles]
 kotest = ["kotest-junit5", "kotest-core", "kotest-datatest", "kotest-property"]
