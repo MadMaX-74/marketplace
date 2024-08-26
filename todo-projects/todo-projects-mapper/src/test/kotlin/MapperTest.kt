@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.mappers.v1
+package ru.otus.todo.mapper
 
 
 import TodoContext
@@ -46,7 +46,7 @@ class MapperTest {
         val context = TodoContext(
             command = TodoCommand.CREATE,
             state = TodoState.RUNNING,
-            errors = listOf(TodoError(code = "404", message = "Not Found")),
+            errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todoResponse = Todo(
                 id = "123",
                 title = "Test Title",
@@ -57,7 +57,7 @@ class MapperTest {
 
         val expected = TaskCreateResponse(
             result = ResponseResult.SUCCESS,
-            errors = listOf(Error(code = "404", message = "Not Found")),
+            errors = mutableListOf(Error(code = "404", message = "Not Found")),
             task = TaskResponseObject(
                 id = "123",
                 title = "Test Title",
@@ -78,7 +78,9 @@ class MapperTest {
                 mode = TaskDebugMode.TEST,
                 stub = TaskRequestDebugStubs.BAD_ID
             ),
-            id = "12345"
+            task = TaskReadObject(
+                id = "12345"
+            )
         )
 
         val expected = TodoContext(
@@ -97,7 +99,7 @@ class MapperTest {
         val context = TodoContext(
             command = TodoCommand.READ,
             state = TodoState.RUNNING,
-            errors = listOf(TodoError(code = "404", message = "Not Found")),
+            errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todoResponse = Todo(
                 id = "123",
                 title = "Test Title",
@@ -157,7 +159,7 @@ class MapperTest {
         val context = TodoContext(
             command = TodoCommand.UPDATE,
             state = TodoState.RUNNING,
-            errors = listOf(TodoError(code = "404", message = "Not Found")),
+            errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todoResponse = Todo(
                 id = "123",
                 title = "Updated Title",
@@ -168,7 +170,7 @@ class MapperTest {
 
         val expected = TaskUpdateResponse(
             result = ResponseResult.SUCCESS,
-            errors = listOf(Error(code = "404", message = "Not Found")),
+            errors = mutableListOf(Error(code = "404", message = "Not Found")),
             task = TaskResponseObject(
                 id = "123",
                 title = "Updated Title",
@@ -190,7 +192,9 @@ class MapperTest {
                 mode = TaskDebugMode.TEST,
                 stub = TaskRequestDebugStubs.NOT_FOUND
             ),
-            id = "12345"
+            task = TaskDeleteObject(
+                id = "12345"
+            )
         )
 
         val expected = TodoContext(
@@ -208,12 +212,12 @@ class MapperTest {
         val context = TodoContext(
             command = TodoCommand.DELETE,
             state = TodoState.FAILING,
-            errors = listOf(TodoError(code = "500", message = "Internal Server Error"))
+            errors = mutableListOf(TodoError(code = "500", message = "Internal Server Error"))
         )
 
         val expected = TaskDeleteResponse(
             result = ResponseResult.ERROR,
-            errors = listOf(Error(code = "500", message = "Internal Server Error"))
+            errors = mutableListOf(Error(code = "500", message = "Internal Server Error"))
         )
 
         val actual = context.toTransportDelete()
@@ -224,8 +228,8 @@ class MapperTest {
         val context = TodoContext(
             command = TodoCommand.LIST,
             state = TodoState.RUNNING,
-            errors = listOf(TodoError(code = "404", message = "Not Found")),
-            todosResponse = listOf(
+            errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
+            todosResponse = mutableListOf(
                 Todo(
                     id = "123",
                     title = "Test Title",
@@ -243,8 +247,8 @@ class MapperTest {
 
         val expected = TaskListResponse(
             result = ResponseResult.SUCCESS,
-            errors = listOf(Error(code = "404", message = "Not Found")),
-            tasks = listOf(
+            errors = mutableListOf(Error(code = "404", message = "Not Found")),
+            tasks = mutableListOf(
                 TaskResponseObject(
                     id = "123",
                     title = "Test Title",

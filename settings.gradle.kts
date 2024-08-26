@@ -9,7 +9,8 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
-rootProject.name = "marketplace"
+rootProject.name = "ru.otus"
 
 //includeBuild("training-modules")
 includeBuild("todo-projects")
+includeBuild("todo-projects-tests")

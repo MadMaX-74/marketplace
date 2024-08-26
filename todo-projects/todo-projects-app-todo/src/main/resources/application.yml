@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info,env
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    use-root-path: true
+    urls:
+      - name: v1
+        url: specs-td-v1.yaml
+

@@ -1,9 +1,9 @@
-package ru.otus.otuskotlin.marketplace.mappers.v1
+package ru.otus.todo.mapper
 
 import TodoContext
 import models.*
-import ru.otus.otuskotlin.marketplace.mappers.v1.exceptions.UnknownRequestClass
 import ru.otus.todo.api.v1.models.*
+import ru.otus.todo.mapper.exceptions.UnknownRequestClass
 import stubs.TodoStubs
 
 
@@ -42,7 +42,7 @@ private fun TodoContext.fromTransport(request: TaskCreateRequest) {
 
 private fun TodoContext.fromTransport(request: TaskReadRequest) {
     command = TodoCommand.READ
-    todoRequest = request.id.toTaskWithId()
+    todoRequest = request.task?.id.toTaskWithId()
     workMode = request.debug?.transportToWorkMode() ?: TodoWorkMode.PROD
     stubCase = request.debug?.transportToStubCase() ?: TodoStubs.NONE
 }
@@ -57,7 +57,7 @@ private fun TodoContext.fromTransport(request: TaskUpdateRequest) {
 
 private fun TodoContext.fromTransport(request: TaskDeleteRequest) {
     command = TodoCommand.DELETE
-    todoRequest = request.id.toTaskWithId()
+    todoRequest = request.task?.id.toTaskWithId()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }

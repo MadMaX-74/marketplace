@@ -25,9 +25,15 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
-include(":todo-service")
 include(":todo-projects-api-v1")
 include(":todo-projects-mapper")
 include(":todo-projects-common")
+
+include(":todo-projects-stubs")
+include(":todo-projects-biz")
+
+include(":todo-projects-app-common")
+include(":todo-projects-app-todo")
+include(":todo-projects-app-journal")
 
 

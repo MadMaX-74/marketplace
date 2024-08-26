@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v1/task/read"
+  },
+
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "responseType": "read",
+      "result": "success",
+      "ad": {
+        "id": "{{{jsonPath request.body '$.task.id'}}}",
+        "title": "Требуется болт",
+        "description": "task description",
+        "status": "{{{jsonPath request.body '$.task.status'}}}",
+        "createdDate": "{{{jsonPath request.body '$.task.createdDate'}}}",
+        "completedDate": "{{{jsonPath request.body '$.task.completedDate'}}}"
+      }
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "transformers": ["response-template"]
+  }
+}

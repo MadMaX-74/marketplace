@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.0.3
 info:
   title: "Planner API"
   description: This is the API for the Planner application
@@ -109,15 +109,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskListResponse'
-  /task/report:
-    get:
-      tags:
-        - task
-      summary: Report task status over WebSocket
-      operationId: taskReport
-      responses:
-        200:
-          description: WebSocket handshake response
 components:
   schemas:
     IRequest:
@@ -220,14 +211,20 @@ components:
             task:
               $ref: '#/components/schemas/TaskResponseObject'
 
+    TaskReadObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+
     TaskReadRequest:
       allOf:
         - $ref: '#/components/schemas/IRequest'
         - $ref: '#/components/schemas/TaskRequestDebug'
         - type: object
           properties:
-            id:
-              $ref: '#/components/schemas/TaskId'
+            task:
+              $ref: '#/components/schemas/TaskReadObject'
 
     TaskReadResponse:
       allOf:
@@ -283,14 +280,36 @@ components:
             task:
               $ref: '#/components/schemas/TaskResponseObject'
 
+    TaskDeleteObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/TaskId'
+        title:
+          type: string
+          description: Название задачи
+        description:
+          type: string
+          description: Описание задачи
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        createdDate:
+          type: string
+          format: date-time
+          description: Дата создания задачи
+        completedDate:
+          type: string
+          format: date-time
+          description: Дата завершения задачи (если выполнена)
+
     TaskDeleteRequest:
       allOf:
         - $ref: '#/components/schemas/IRequest'
         - $ref: '#/components/schemas/TaskRequestDebug'
         - type: object
           properties:
-            id:
-              $ref: '#/components/schemas/TaskId'
+            task:
+              $ref: '#/components/schemas/TaskDeleteObject'
 
     TaskDeleteResponse:
       allOf:

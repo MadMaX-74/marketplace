@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v1/ad/update"
+  },
+
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "responseType": "update",
+      "result": "success",
+      "tasks": [
+        {
+          "id": "123",
+          "title": "New Task",
+          "description": "task description",
+          "status": "{{{jsonPath request.body '$.task.status'}}}",
+          "createdDate": "{{{jsonPath request.body '$.task.createdDate'}}}",
+          "completedDate": "{{{jsonPath request.body '$.task.completedDate'}}}"
+        },
+        {
+          "id": "1234",
+          "title": "New new Task",
+          "description": "task description",
+          "status": "{{{jsonPath request.body '$.task.status'}}}",
+          "createdDate": "{{{jsonPath request.body '$.task.createdDate'}}}",
+          "completedDate": "{{{jsonPath request.body '$.task.completedDate'}}}"
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
