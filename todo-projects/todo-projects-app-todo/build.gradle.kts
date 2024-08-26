@@ -35,6 +35,7 @@ dependencies {
 
     // tests
     testImplementation(kotlin("test-junit5"))
+    testImplementation(libs.spring.test)
     testImplementation(libs.testcontainers.core)
     testImplementation(libs.testcontainers.rabbitmq)
     testImplementation(libs.mockito.kotlin)
