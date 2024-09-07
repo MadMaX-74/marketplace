@@ -8,6 +8,7 @@ data class TodoContext(
     var state: TodoState = TodoState.NONE,
     val errors: MutableList<TodoError> = mutableListOf(),
 
+    var corSettings: TodoCorSettings = TodoCorSettings(),
     var workMode: TodoWorkMode = TodoWorkMode.PROD,
     var stubCase: TodoStubs = TodoStubs.NONE,
 
