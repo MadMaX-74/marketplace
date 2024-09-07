@@ -23,6 +23,7 @@ fun ICorChainDsl<TodoContext>.stubUpdateSuccess(title: String, corSettings: Todo
             todoRequest.title.takeIf { it.isNotBlank() }?.also { this.title = it }
             todoRequest.description.takeIf { it.isNotBlank() }?.also { this.description = it }
             todoRequest.status.takeIf { it != TodoStatus.COMPLETED }?.also { this.status = it }
+            todoRequest.createdDate.takeIf {it != null }?.also { this.createdDate = it }
             todoRequest.completedDate.takeIf { it != null }?.also { this.completedDate = it }
         }
         todoResponse = stub

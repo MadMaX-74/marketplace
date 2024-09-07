@@ -10,6 +10,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-common"))
 
+                implementation(libs.cor)
+
                 implementation(project(":todo-projects-common"))
                 implementation(project(":todo-projects-stubs"))
             }
