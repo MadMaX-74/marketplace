@@ -21,3 +21,14 @@ inline fun TodoContext.fail(error: TodoError) {
     addError(error)
     state = TodoState.FAILING
 }
+
+inline fun errorValidation(
+    field: String,
+    violationCode: String,
+    description: String,
+) = TodoError(
+    code = "validation-$field-$violationCode",
+    field = field,
+    group = "validation",
+    message = "Validation error for field $field: $description"
+)

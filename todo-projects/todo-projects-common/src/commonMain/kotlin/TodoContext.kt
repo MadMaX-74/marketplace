@@ -12,6 +12,9 @@ data class TodoContext(
     var workMode: TodoWorkMode = TodoWorkMode.PROD,
     var stubCase: TodoStubs = TodoStubs.NONE,
 
+    var todoValidating: Todo = Todo(),
+    var todoValidated: Todo = Todo(),
+
     var requestId: TodoRequestId = TodoRequestId.NONE,
     var timeStart: Instant = Instant.DISTANT_PAST,
     var todoRequest: Todo = Todo(),

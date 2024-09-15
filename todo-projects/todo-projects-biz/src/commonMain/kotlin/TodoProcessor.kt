@@ -3,11 +3,14 @@ package ru.otus.todo.biz
 import TodoContext
 import TodoCorSettings
 import models.TodoCommand
+import models.TodoId
 import ru.otus.todo.biz.general.initStatus
 import ru.otus.todo.biz.general.operation
 import ru.otus.todo.biz.general.stubs
 import ru.otus.todo.biz.stubs.*
+import ru.otus.todo.biz.validation.*
 import ru.otus.todo.cor.rootChain
+import ru.otus.todo.cor.worker
 
 
 class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.NONE) {
@@ -24,6 +27,16 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            validation {
+                worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
+                worker("Очистка id") { todoValidating.id = TodoId.NONE.toString() }
+                worker("Очистка заголовка") { todoValidating.title = todoValidating.title.trim() }
+                worker("Очистка описания") { todoValidating.description = todoValidating.description.trim() }
+                validateTitleNotEmpty("Проверка, что заголовок не пуст")
+                validateTitleHasContent("Проверка символов")
+                validateCreatedDateNotEmpty("Проверка даты")
+                finishTodoValidation("Завершение проверок")
+            }
         }
         operation("Получить объявление", TodoCommand.READ) {
             stubs("Обработка стабов") {
@@ -31,6 +44,13 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 stubValidationBadId("Имитация ошибки валидации id")
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
+            }
+            validation {
+                worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
+                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.trim()).toString() }
+                validateIdNotEmpty("Проверка на непустой id")
+                validateTitleNotEmpty("Проверка, что заголовок не пуст")
+                finishTodoValidation("Успешное завершение процедуры валидации")
             }
         }
         operation("Изменить объявление", TodoCommand.UPDATE) {
@@ -42,21 +62,18 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
-        }
-        operation("Удалить объявление", TodoCommand.DELETE) {
-            stubs("Обработка стабов") {
-                stubDeleteSuccess("Имитация успешной обработки", corSettings)
-                stubValidationBadId("Имитация ошибки валидации id")
-                stubDbError("Имитация ошибки работы с БД")
-                stubNoCase("Ошибка: запрошенный стаб недопустим")
-            }
-        }
-        operation("Поиск подходящих предложений для объявления", TodoCommand.LIST) {
-            stubs("Обработка стабов") {
-                stubListSuccess("Имитация успешной обработки", corSettings)
-                stubValidationBadId("Имитация ошибки валидации id")
-                stubDbError("Имитация ошибки работы с БД")
-                stubNoCase("Ошибка: запрошенный стаб недопустим")
+            validation {
+                worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
+                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.trim()).toString() }
+                worker("Очистка заголовка") { todoValidating.title = todoValidating.title.trim() }
+                worker("Очистка описания") { todoValidating.description = todoValidating.description.trim() }
+                worker("Очистка даты") { todoValidating.createdDate = todoValidating.createdDate }
+                validateIdNotEmpty("Проверка на непустой id")
+                validateTitleNotEmpty("Проверка на непустой заголовок")
+                validateTitleHasContent("Проверка на наличие содержания в заголовке")
+                validateCreatedDateNotEmpty("Проверка даты")
+
+                finishTodoValidation("Успешное завершение процедуры валидации")
             }
         }
     }.build()
