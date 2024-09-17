@@ -7,15 +7,15 @@ import ru.otus.todo.biz.TodoProcessor
 
 @Suppress("unused")
 @Configuration
-class TodoConfig {
+open class TodoConfig {
     @Bean
-    fun processor(corSettings: TodoCorSettings) = TodoProcessor(corSettings = corSettings)
+    open fun processor(corSettings: TodoCorSettings) = TodoProcessor(corSettings = corSettings)
 
     @Bean
-    fun corSettings(): TodoCorSettings = TodoCorSettings()
+    open fun corSettings(): TodoCorSettings = TodoCorSettings()
 
     @Bean
-    fun appSettings(
+    open fun appSettings(
         corSettings: TodoCorSettings,
         processor: TodoProcessor,
     ) = TodoAppSettings(
