@@ -10,9 +10,7 @@ import ru.otus.todo.app.todo.services.toFormattedString
 import ru.otus.todo.mapper.fromTransport
 import ru.otus.todo.mapper.toTransportTodo
 import java.time.LocalDateTime
-import kotlin.reflect.KClass
 
-@Suppress("unused")
 @RestController
 @RequestMapping("v1/task")
 class TodoControllerV1(

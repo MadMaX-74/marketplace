@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.BodyInserters
 import ru.otus.todo.api.v1.models.*
 import ru.otus.todo.app.todo.config.TodoConfig
 import ru.otus.todo.app.todo.controllers.TodoControllerV1
+import ru.otus.todo.app.todo.services.RabbitMQSender
 import ru.otus.todo.biz.TodoProcessor
 import ru.otus.todo.mapper.*
 import ru.otus.todo.stubs.TodoStub
@@ -28,6 +29,10 @@ internal class TodoControllerV1MockTest {
     @Suppress("unused")
     @MockBean
     private lateinit var processor: TodoProcessor
+
+    @MockBean
+    lateinit var rabbitMQSender: RabbitMQSender
+
 
     @BeforeEach
     fun tearUp() {
