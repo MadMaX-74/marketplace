@@ -76,5 +76,30 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 finishTodoValidation("Успешное завершение процедуры валидации")
             }
         }
+        operation("Удалить задачи", TodoCommand.DELETE) {
+            stubs("Обработка стабов") {
+                stubDeleteSuccess("Имитация успешной обработки", corSettings)
+                stubValidationBadId("Имитация ошибки валидации id")
+                stubDbError("Имитация ошибки работы с БД")
+                stubNoCase("Ошибка: запрошенный стаб недопустим")
+            }
+            validation {
+                worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
+                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.trim()).toString() }
+                worker("Очистка заголовка") { todoValidating.title = todoValidating.title.trim() }
+                worker("Очистка описания") { todoValidating.description = todoValidating.description.trim() }
+                worker("Очистка даты") { todoValidating.createdDate = todoValidating.createdDate }
+                validateIdNotEmpty("Проверка на непустой id")
+                finishTodoValidation("Успешное завершение процедуры валидации")
+            }
+        }
+        operation("Возврат списка задач", TodoCommand.LIST) {
+            stubs("Обработка стабов") {
+                stubListSuccess("Имитация успешной обработки", corSettings)
+                stubValidationBadId("Имитация ошибки валидации id")
+                stubDbError("Имитация ошибки работы с БД")
+                stubNoCase("Ошибка: запрошенный стаб недопустим")
+            }
+        }
     }.build()
 }
