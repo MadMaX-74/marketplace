@@ -18,7 +18,7 @@ data class TodoContext(
     var requestId: TodoRequestId = TodoRequestId.NONE,
     var timeStart: Instant = Instant.DISTANT_PAST,
     var todoRequest: Todo = Todo(),
-    var todoFilterRequest: TodoFilter = TodoFilter(),
+    var todosRequest: List<Todo> = mutableListOf(),
 
     var todoResponse: Todo = Todo(),
     var todosResponse: MutableList<Todo> = mutableListOf()

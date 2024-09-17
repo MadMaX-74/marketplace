@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class Application
+class Application
 
 
 // swagger URL: http://localhost:8080/swagger-ui.html

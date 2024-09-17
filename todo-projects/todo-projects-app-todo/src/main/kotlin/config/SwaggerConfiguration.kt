@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.markeplace.app.spring.config
+package ru.otus.todo.app.todo.config
 
 import org.springdoc.core.configuration.SpringDocConfiguration
 import org.springdoc.core.properties.SpringDocConfigProperties
