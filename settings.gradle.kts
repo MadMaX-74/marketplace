@@ -12,5 +12,7 @@ plugins {
 rootProject.name = "ru.otus"
 
 //includeBuild("training-modules")
-includeBuild("todo-projects")
+includeBuild("todo-projects-libs")
 includeBuild("todo-projects-tests")
+
+includeBuild("todo-projects")

@@ -10,6 +10,7 @@ data class Todo(
     var createdDate: Instant = Instant.DISTANT_PAST,
     var completedDate: Instant? = null
 ) {
+    fun deepCopy(): Todo = copy()
     fun isEmpty() = this == NONE
 
     companion object {

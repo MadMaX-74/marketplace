@@ -8,13 +8,17 @@ data class TodoContext(
     var state: TodoState = TodoState.NONE,
     val errors: MutableList<TodoError> = mutableListOf(),
 
+    var corSettings: TodoCorSettings = TodoCorSettings(),
     var workMode: TodoWorkMode = TodoWorkMode.PROD,
     var stubCase: TodoStubs = TodoStubs.NONE,
+
+    var todoValidating: Todo = Todo(),
+    var todoValidated: Todo = Todo(),
 
     var requestId: TodoRequestId = TodoRequestId.NONE,
     var timeStart: Instant = Instant.DISTANT_PAST,
     var todoRequest: Todo = Todo(),
-    var todoFilterRequest: TodoFilter = TodoFilter(),
+    var todosRequest: List<Todo> = mutableListOf(),
 
     var todoResponse: Todo = Todo(),
     var todosResponse: MutableList<Todo> = mutableListOf()

@@ -6,12 +6,14 @@ import models.TodoStatus
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 import ru.otus.todo.api.v1.models.*
 import ru.otus.todo.app.todo.config.TodoConfig
 import ru.otus.todo.app.todo.controllers.TodoControllerV1
+import ru.otus.todo.app.todo.services.RabbitMQSender
 import ru.otus.todo.mapper.*
 import ru.otus.todo.stubs.TodoStub
 import kotlin.test.Test
@@ -21,6 +23,9 @@ import kotlin.test.Test
 internal class TodoControllerV1StubTest {
     @Autowired
     private lateinit var webClient: WebTestClient
+
+    @MockBean
+    lateinit var rabbitMQSender: RabbitMQSender
 
     @Test
     fun createTask() = testStubTask(

@@ -19,6 +19,7 @@ data class TaskMessage(
     val status: String
 )
 
+@Suppress("unused")
 @Service
 class RabbitMQSender(private val rabbitTemplate: RabbitTemplate) {
     fun sendTaskMessage(taskMessage: TaskMessage) {

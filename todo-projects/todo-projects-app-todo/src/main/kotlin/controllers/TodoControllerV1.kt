@@ -1,8 +1,8 @@
 package ru.otus.todo.app.todo.controllers
 
-import controllerHelper
 import org.springframework.web.bind.annotation.*
 import ru.otus.todo.api.v1.models.*
+import ru.otus.todo.app.common.controllerHelper
 import ru.otus.todo.app.todo.config.TodoAppSettings
 import ru.otus.todo.app.todo.services.RabbitMQSender
 import ru.otus.todo.app.todo.services.TaskMessage
@@ -10,9 +10,7 @@ import ru.otus.todo.app.todo.services.toFormattedString
 import ru.otus.todo.mapper.fromTransport
 import ru.otus.todo.mapper.toTransportTodo
 import java.time.LocalDateTime
-import kotlin.reflect.KClass
 
-@Suppress("unused")
 @RestController
 @RequestMapping("v1/task")
 class TodoControllerV1(
@@ -22,7 +20,7 @@ class TodoControllerV1(
 
     @PostMapping("create")
     suspend fun create(@RequestBody request: TaskCreateRequest): TaskCreateResponse {
-        val response: TaskCreateResponse = process(appSettings, request = request, clazz = this::class, logId = "create")
+        val response: TaskCreateResponse = process(appSettings, request = request)
 
         val taskMessage = TaskMessage(
             date = LocalDateTime.now().toFormattedString(),
@@ -38,11 +36,11 @@ class TodoControllerV1(
 
     @PostMapping("read")
     suspend fun  read(@RequestBody request: TaskReadRequest): TaskReadResponse =
-        process(appSettings, request = request, this::class, "read")
+        process(appSettings, request = request)
 
     @RequestMapping("update", method = [RequestMethod.POST])
     suspend fun  update(@RequestBody request: TaskUpdateRequest): TaskUpdateResponse {
-        val response: TaskUpdateResponse = process(appSettings, request = request, clazz = this::class, logId = "update")
+        val response: TaskUpdateResponse = process(appSettings, request = request)
 
         val taskMessage = TaskMessage(
             date = LocalDateTime.now().toFormattedString(),
@@ -58,7 +56,7 @@ class TodoControllerV1(
 
     @PostMapping("delete")
     suspend fun  delete(@RequestBody request: TaskDeleteRequest): TaskDeleteResponse {
-        val response: TaskDeleteResponse = process(appSettings, request = request, clazz = this::class, logId = "delete")
+        val response: TaskDeleteResponse = process(appSettings, request = request)
 
         val taskMessage = TaskMessage(
             date = LocalDateTime.now().toFormattedString(),
@@ -75,19 +73,15 @@ class TodoControllerV1(
 
     @PostMapping("list")
     suspend fun  offers(@RequestBody request: TaskListRequest): TaskListResponse =
-        process(appSettings, request = request, this::class, "list")
+        process(appSettings, request = request)
 
     companion object {
         suspend inline fun <reified Q : IRequest, reified R : IResponse> process(
             appSettings: TodoAppSettings,
             request: Q,
-            clazz: KClass<*>,
-            logId: String,
         ): R = appSettings.controllerHelper(
             { fromTransport(request) },
-            { toTransportTodo() as R },
-            clazz,
-            logId
+            { toTransportTodo() as R }
         )
     }
 }

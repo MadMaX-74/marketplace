@@ -1,16 +1,17 @@
-package ru.otus.otuskotlin.markeplace.app.spring.config
+package ru.otus.todo.app.todo.config
 
 import org.springdoc.core.configuration.SpringDocConfiguration
 import org.springdoc.core.properties.SpringDocConfigProperties
 import org.springdoc.core.providers.ObjectMapperProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 
 // swagger url: http://localhost:8080/swagger-ui/index.html
-@Suppress("unused")
 @Configuration
 class SwaggerConfiguration {
     @Bean
+    @Primary
     fun springDocConfiguration() = SpringDocConfiguration()
 
     @Bean

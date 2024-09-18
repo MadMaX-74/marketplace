@@ -1,6 +1,8 @@
-package ru.otus.otuskotlin.marketplace.common.helpers
+package helpers
 
+import TodoContext
 import models.TodoError
+import models.TodoState
 
 fun Throwable.asTodoError(
     code: String = "unknown",
@@ -12,4 +14,21 @@ fun Throwable.asTodoError(
     field = "",
     message = message,
     exception = this,
+)
+inline fun TodoContext.addError(vararg error: TodoError) = errors.addAll(error)
+
+inline fun TodoContext.fail(error: TodoError) {
+    addError(error)
+    state = TodoState.FAILING
+}
+
+inline fun errorValidation(
+    field: String,
+    violationCode: String,
+    description: String,
+) = TodoError(
+    code = "validation-$field-$violationCode",
+    field = field,
+    group = "validation",
+    message = "Validation error for field $field: $description"
 )
