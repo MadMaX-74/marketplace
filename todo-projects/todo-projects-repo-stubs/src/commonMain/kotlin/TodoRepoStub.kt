@@ -1,34 +1,45 @@
 package ru.otus.todo.backend.repository.inmemory
 
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.repo.DbTodoIdRequest
+import ru.otus.todo.common.repo.DbTodoListRequest
+import ru.otus.todo.common.repo.DbTodoRequest
+import ru.otus.todo.common.repo.DbTodoResponseOk
+import ru.otus.todo.common.repo.DbTodosResponseOk
+import ru.otus.todo.common.repo.IDbTodoResponse
+import ru.otus.todo.common.repo.IDbTodosResponse
+import ru.otus.todo.common.repo.IRepoTodo
+import ru.otus.todo.stubs.TodoStub
 
-//class TodoRepoStub() : IRepoAd {
-//    override suspend fun createAd(rq: DbAdRequest): IDbAdResponse {
-//        return DbAdResponseOk(
-//            data = MkplAdStub.get(),
-//        )
-//    }
-//
-//    override suspend fun readAd(rq: DbAdIdRequest): IDbAdResponse {
-//        return DbAdResponseOk(
-//            data = MkplAdStub.get(),
-//        )
-//    }
-//
-//    override suspend fun updateAd(rq: DbAdRequest): IDbAdResponse {
-//        return DbAdResponseOk(
-//            data = MkplAdStub.get(),
-//        )
-//    }
-//
-//    override suspend fun deleteAd(rq: DbAdIdRequest): IDbAdResponse {
-//        return DbAdResponseOk(
-//            data = MkplAdStub.get(),
-//        )
-//    }
-//
-//    override suspend fun searchAd(rq: DbAdFilterRequest): IDbAdsResponse {
-//        return DbAdsResponseOk(
-//            data = MkplAdStub.prepareSearchList(filter = "", MkplDealSide.DEMAND),
-//        )
-//    }
-//}
+
+class TodoRepoStub() : IRepoTodo {
+    override suspend fun createTodo(rq: DbTodoRequest): IDbTodoResponse {
+        return DbTodoResponseOk(
+            data = TodoStub.get(),
+        )
+    }
+
+    override suspend fun readTodo(rq: DbTodoIdRequest): IDbTodoResponse {
+        return DbTodoResponseOk(
+            data = TodoStub.get(),
+        )
+    }
+
+    override suspend fun updateTodo(rq: DbTodoRequest): IDbTodoResponse {
+        return DbTodoResponseOk(
+            data = TodoStub.get(),
+        )
+    }
+
+    override suspend fun deleteTodo(rq: DbTodoIdRequest): IDbTodoResponse {
+        return DbTodoResponseOk(
+            data = TodoStub.get(),
+        )
+    }
+
+    override suspend fun listTodo(rq: DbTodoListRequest): IDbTodosResponse {
+        return DbTodosResponseOk(
+            data = TodoStub.prepareTaskList(status = TodoStatus.IN_PROGRESS),
+        )
+    }
+}
