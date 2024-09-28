@@ -27,7 +27,7 @@ class TodoUpdateStubTest {
             workMode = TodoWorkMode.STUB,
             stubCase = TodoStubs.SUCCESS,
             todoRequest = Todo(
-                id = id,
+                id = TodoId(id),
                 title = title,
                 description = description,
                 status = status,
@@ -36,7 +36,7 @@ class TodoUpdateStubTest {
             ),
         )
         processor.exec(ctx)
-        assertEquals(id, ctx.todoResponse.id)
+        assertEquals(TodoId(id), ctx.todoResponse.id)
         assertEquals(title, ctx.todoResponse.title)
         assertEquals(description, ctx.todoResponse.description)
         assertEquals(status, ctx.todoResponse.status)

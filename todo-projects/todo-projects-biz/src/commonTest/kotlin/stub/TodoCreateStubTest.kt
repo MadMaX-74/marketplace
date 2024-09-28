@@ -29,7 +29,7 @@ class TodoCreateStubTest {
             workMode = TodoWorkMode.STUB,
             stubCase = TodoStubs.SUCCESS,
             todoRequest = Todo(
-                id = id.toString(),
+                id = id,
                 title = title,
                 description = description,
                 status = status,
@@ -54,7 +54,7 @@ class TodoCreateStubTest {
             workMode = TodoWorkMode.STUB,
             stubCase = TodoStubs.BAD_DESCRIPTION,
             todoRequest = Todo(
-                id = id.toString(),
+                id = id,
                 title = title,
                 description = "",
                 status = status,
@@ -76,7 +76,7 @@ class TodoCreateStubTest {
             workMode = TodoWorkMode.STUB,
             stubCase = TodoStubs.DB_ERROR,
             todoRequest = Todo(
-                id = id.toString(),
+                id = id,
             ),
         )
         processor.exec(ctx)
@@ -92,7 +92,7 @@ class TodoCreateStubTest {
             workMode = TodoWorkMode.STUB,
             stubCase = TodoStubs.BAD_ID,
             todoRequest = Todo(
-                id = id.toString(),
+                id = id,
                 title = title,
                 description = description,
                 status = status,

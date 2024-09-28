@@ -70,7 +70,7 @@ private fun TodoContext.fromTransport(request: TaskListRequest) {
 
 // Дополнительные функции для преобразования типов
 private fun String?.toTaskId(): TodoId = this?.let { TodoId(it) } ?: TodoId.NONE
-private fun String?.toTaskWithId(): Todo = Todo(id = this.toTaskId().asString())
+private fun String?.toTaskWithId(): Todo = Todo(id = this.toTaskId())
 
 private fun TaskCreateObject.toInternal(): Todo = Todo(
     title = this.title ?: "",
@@ -79,7 +79,7 @@ private fun TaskCreateObject.toInternal(): Todo = Todo(
 )
 
 private fun TaskUpdateObject.toInternal(): Todo = Todo(
-    id = this.id.toTaskId().toString(),
+    id = this.id.toTaskId(),
     title = this.title ?: "",
     description = this.description ?: "",
     status = this.status?.toInternal() ?: TodoStatus.NONE

@@ -19,7 +19,7 @@ object TodoStub {
     )
 
     private fun todoTask(id: String, status: TodoStatus) = Todo(
-        id = TodoId(id).toString(),
+        id = TodoId(id),
         title = "Task $id",
         description = "Description of task $id",
         status = status,
