@@ -19,7 +19,7 @@ fun ICorChainDsl<TodoContext>.stubUpdateSuccess(title: String, corSettings: Todo
     handle {
         state = TodoState.FINISHING
         val stub = TodoStub.prepareResult {
-            todoRequest.id.takeIf { it != TodoId.NONE.toString() }?.also { this.id = it }
+            todoRequest.id.takeIf { it != TodoId.NONE }?.also { this.id = it }
             todoRequest.title.takeIf { it.isNotBlank() }?.also { this.title = it }
             todoRequest.description.takeIf { it.isNotBlank() }?.also { this.description = it }
             todoRequest.status.takeIf { it != TodoStatus.COMPLETED }?.also { this.status = it }

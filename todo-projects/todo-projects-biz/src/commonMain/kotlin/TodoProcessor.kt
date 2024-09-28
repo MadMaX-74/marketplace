@@ -29,7 +29,7 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
             }
             validation {
                 worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
-                worker("Очистка id") { todoValidating.id = TodoId.NONE.toString() }
+                worker("Очистка id") { todoValidating.id = TodoId.NONE }
                 worker("Очистка заголовка") { todoValidating.title = todoValidating.title.trim() }
                 worker("Очистка описания") { todoValidating.description = todoValidating.description.trim() }
                 validateTitleNotEmpty("Проверка, что заголовок не пуст")
@@ -47,7 +47,7 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
             }
             validation {
                 worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
-                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.trim()).toString() }
+                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.asString().trim())}
                 validateIdNotEmpty("Проверка на непустой id")
                 validateTitleNotEmpty("Проверка, что заголовок не пуст")
                 finishTodoValidation("Успешное завершение процедуры валидации")
@@ -64,7 +64,7 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
             }
             validation {
                 worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
-                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.trim()).toString() }
+                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.asString().trim()) }
                 worker("Очистка заголовка") { todoValidating.title = todoValidating.title.trim() }
                 worker("Очистка описания") { todoValidating.description = todoValidating.description.trim() }
                 worker("Очистка даты") { todoValidating.createdDate = todoValidating.createdDate }
@@ -85,7 +85,7 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
             }
             validation {
                 worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
-                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.trim()).toString() }
+                worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.asString().trim()) }
                 worker("Очистка заголовка") { todoValidating.title = todoValidating.title.trim() }
                 worker("Очистка описания") { todoValidating.description = todoValidating.description.trim() }
                 worker("Очистка даты") { todoValidating.createdDate = todoValidating.createdDate }

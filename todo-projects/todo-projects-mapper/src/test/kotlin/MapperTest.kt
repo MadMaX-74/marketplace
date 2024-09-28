@@ -2,6 +2,7 @@ package ru.otus.todo.mapper
 
 
 import TodoContext
+import jdk.internal.net.http.common.Log.errors
 import models.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -48,7 +49,7 @@ class MapperTest {
             state = TodoState.RUNNING,
             errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todoResponse = Todo(
-                id = "123",
+                id = TodoId("123"),
                 title = "Test Title",
                 description = "Test Description",
                 status = TodoStatus.COMPLETED
@@ -85,7 +86,7 @@ class MapperTest {
 
         val expected = TodoContext(
             command = TodoCommand.READ,
-            todoRequest = Todo( id = "12345"),
+            todoRequest = Todo( id = TodoId("12345")),
             workMode = TodoWorkMode.TEST,
             stubCase = TodoStubs.BAD_ID
         )
@@ -101,7 +102,7 @@ class MapperTest {
             state = TodoState.RUNNING,
             errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todoResponse = Todo(
-                id = "123",
+                id = TodoId("123"),
                 title = "Test Title",
                 description = "Test Description",
                 status = TodoStatus.COMPLETED
@@ -141,7 +142,7 @@ class MapperTest {
         val expected = TodoContext(
             command = TodoCommand.UPDATE,
             todoRequest = Todo(
-                id = TodoId("12345").toString(),  // Используем TodoId
+                id = TodoId("12345"),  // Используем TodoId
                 title = "Updated Title",
                 description = "Updated Description",
                 status = TodoStatus.COMPLETED
@@ -161,7 +162,7 @@ class MapperTest {
             state = TodoState.RUNNING,
             errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todoResponse = Todo(
-                id = "123",
+                id = TodoId("123"),
                 title = "Updated Title",
                 description = "Updated Description",
                 status = TodoStatus.COMPLETED
@@ -199,7 +200,7 @@ class MapperTest {
 
         val expected = TodoContext(
             command = TodoCommand.DELETE,
-            todoRequest = Todo(id = "12345"),
+            todoRequest = Todo(id = TodoId("12345")),
             workMode = TodoWorkMode.TEST,
             stubCase = TodoStubs.NOT_FOUND
         )
@@ -231,13 +232,13 @@ class MapperTest {
             errors = mutableListOf(TodoError(code = "404", message = "Not Found")),
             todosResponse = mutableListOf(
                 Todo(
-                    id = "123",
+                    id = TodoId("123"),
                     title = "Test Title",
                     description = "Test Description",
                     status = TodoStatus.COMPLETED
                 ),
                 Todo(
-                    id = "124",
+                    id = TodoId("124"),
                     title = "Another Title",
                     description = "Another Description",
                     status = TodoStatus.IN_PROGRESS

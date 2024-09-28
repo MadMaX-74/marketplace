@@ -52,11 +52,12 @@ fun List<Todo>.toTransportTasks(): List<TaskResponseObject>? = this
     .takeIf { it.isNotEmpty() }
 
 private fun Todo.toTransportTask(): TaskResponseObject = TaskResponseObject(
-    id = id.takeIf { it != TodoId.NONE.asString() },
-    title = title.takeIf { it.isNotBlank() },
-    description = description.takeIf { it.isNotBlank() },
+    id = if (id != TodoId.NONE) id.asString() else null,
+    title = title.takeIf { it.isNotBlank() == true },
+    description = description.takeIf { it.isNotBlank() == true },
     status = status.toTransportTask()
 )
+
 
 private fun TodoStatus.toTransportTask(): TaskStatus? = when (this) {
     TodoStatus.IN_PROGRESS -> TaskStatus.IN_PROGRESS

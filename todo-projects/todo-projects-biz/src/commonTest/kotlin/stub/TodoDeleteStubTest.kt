@@ -22,7 +22,7 @@ class TodoDeleteStubTest {
             workMode = TodoWorkMode.STUB,
             stubCase = TodoStubs.SUCCESS,
             todoRequest = Todo(
-                id = id.toString(),
+                id = id,
             ),
         )
         processor.exec(ctx)
