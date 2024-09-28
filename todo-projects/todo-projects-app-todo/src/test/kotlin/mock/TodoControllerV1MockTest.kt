@@ -1,7 +1,5 @@
 package ru.otus.todo.app.todo.mock
 
-import TodoContext
-import models.TodoStatus
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.mockito.kotlin.any
@@ -17,6 +15,8 @@ import ru.otus.todo.app.todo.config.TodoConfig
 import ru.otus.todo.app.todo.controllers.TodoControllerV1
 import ru.otus.todo.app.todo.services.RabbitMQSender
 import ru.otus.todo.biz.TodoProcessor
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.TodoStatus
 import ru.otus.todo.mapper.*
 import ru.otus.todo.stubs.TodoStub
 import kotlin.test.Test

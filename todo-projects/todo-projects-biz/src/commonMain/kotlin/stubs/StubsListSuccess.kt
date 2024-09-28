@@ -1,13 +1,14 @@
 package ru.otus.todo.biz.stubs
 
-import TodoContext
-import TodoCorSettings
-import models.TodoState
-import models.TodoStatus
+
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.TodoCorSettings
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.stubs.TodoStubs
 import ru.otus.todo.cor.ICorChainDsl
 import ru.otus.todo.cor.worker
 import ru.otus.todo.stubs.TodoStub
-import stubs.TodoStubs
 
 fun ICorChainDsl<TodoContext>.stubListSuccess(title: String, corSettings: TodoCorSettings) = worker {
     this.title = title

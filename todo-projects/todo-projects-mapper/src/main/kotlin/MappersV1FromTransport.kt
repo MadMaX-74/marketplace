@@ -1,10 +1,15 @@
 package ru.otus.todo.mapper
 
-import TodoContext
-import models.*
+
 import ru.otus.todo.api.v1.models.*
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoId
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.models.TodoWorkMode
+import ru.otus.todo.common.stubs.TodoStubs
 import ru.otus.todo.mapper.exceptions.UnknownRequestClass
-import stubs.TodoStubs
 
 
 fun TodoContext.fromTransport(request: IRequest) = when (request) {

@@ -1,6 +1,6 @@
-package ru.otus.otuskotlin.marketplace.repo.common
+package ru.otus.todo.repo.common
 
-import models.Todo
+import ru.otus.todo.common.models.Todo
 
 
 /**

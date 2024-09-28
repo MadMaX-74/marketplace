@@ -1,4 +1,5 @@
-package repo
+package ru.otus.todo.common.repo
+
 
 interface IRepoTodo {
     suspend fun createTodo(rq: DbTodoRequest): IDbTodoResponse

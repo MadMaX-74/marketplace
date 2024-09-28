@@ -1,9 +1,9 @@
 package ru.otus.todo.stubs
 
 import kotlinx.datetime.Clock
-import models.Todo
-import models.TodoId
-import models.TodoStatus
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoId
+import ru.otus.todo.common.models.TodoStatus
 import ru.otus.todo.stubs.TodoStubTask.TASK_IN_PROGRESS
 
 

@@ -1,8 +1,8 @@
 package ru.otus.todo.biz.general
 
-import TodoContext
-import models.TodoCommand
-import models.TodoState
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoState
 import ru.otus.todo.cor.ICorChainDsl
 import ru.otus.todo.cor.chain
 

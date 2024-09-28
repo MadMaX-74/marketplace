@@ -1,8 +1,7 @@
-package ru.otus.otuskotlin.marketplace.repo.common
+package ru.otus.todo.repo.common
 
-import models.Todo
-import repo.IRepoTodo
-
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.repo.IRepoTodo
 
 interface IRepoTodoInitializable: IRepoTodo {
     fun save(ads: Collection<Todo>): Collection<Todo>

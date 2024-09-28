@@ -37,5 +37,6 @@ include(":todo-projects-app-todo")
 include(":todo-projects-app-journal")
 
 include(":todo-projects-repo-common")
+include(":todo-projects-repo-stubs")
 
 

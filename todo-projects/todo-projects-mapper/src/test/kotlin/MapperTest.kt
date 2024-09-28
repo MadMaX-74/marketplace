@@ -1,13 +1,17 @@
 package ru.otus.todo.mapper
 
-
-import TodoContext
-import jdk.internal.net.http.common.Log.errors
-import models.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import ru.otus.todo.api.v1.models.*
-import stubs.TodoStubs
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoError
+import ru.otus.todo.common.models.TodoId
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.models.TodoWorkMode
+import ru.otus.todo.common.stubs.TodoStubs
 
 class MapperTest {
 

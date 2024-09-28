@@ -1,9 +1,9 @@
 package ru.otus.todo.mapper
 
-import TodoContext
-import exceptions.UnknownTodoCommand
-import models.*
 import ru.otus.todo.api.v1.models.*
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.exceptions.UnknownTodoCommand
+import ru.otus.todo.common.models.*
 
 
 fun TodoContext.toTransportTodo(): IResponse = when (val cmd = command) {

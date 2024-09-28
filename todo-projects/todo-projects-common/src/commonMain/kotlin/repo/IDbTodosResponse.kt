@@ -1,7 +1,7 @@
-package repo
+package ru.otus.todo.common.repo
 
-import models.Todo
-import models.TodoError
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoError
 
 
 sealed interface IDbTodosResponse: IDbResponse<List<Todo>>

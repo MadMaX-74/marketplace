@@ -1,9 +1,10 @@
 package ru.otus.todo.app.todo.config
 
-import TodoCorSettings
+
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ru.otus.todo.biz.TodoProcessor
+import ru.otus.todo.common.TodoCorSettings
 
 @Suppress("unused")
 @Configuration

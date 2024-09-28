@@ -1,10 +1,15 @@
 package ru.otus.todo.biz.validation
 
-import TodoContext
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
-import models.*
 import ru.otus.todo.biz.TodoProcessor
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoId
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.models.TodoWorkMode
 import ru.otus.todo.stubs.TodoStub
 import kotlin.test.assertContains
 import kotlin.test.assertEquals

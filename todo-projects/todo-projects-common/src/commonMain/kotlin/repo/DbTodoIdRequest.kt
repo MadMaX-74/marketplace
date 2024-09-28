@@ -1,8 +1,7 @@
-package repo
+package ru.otus.todo.common.repo
 
-import models.Todo
-import models.TodoId
-
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoId
 
 data class DbTodoIdRequest(
     val id: TodoId,

@@ -1,4 +1,4 @@
-package models
+package ru.otus.todo.common.models
 
 import kotlinx.datetime.Instant
 
