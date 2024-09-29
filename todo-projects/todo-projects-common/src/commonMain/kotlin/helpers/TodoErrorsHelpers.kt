@@ -23,6 +23,11 @@ inline fun TodoContext.fail(error: TodoError) {
     state = TodoState.FAILING
 }
 
+inline fun TodoContext.fail(errors: Collection<TodoError>) {
+    addErrors(errors)
+    state = TodoState.FAILING
+}
+
 inline fun errorValidation(
     field: String,
     violationCode: String,
