@@ -51,18 +51,6 @@ internal class TodoRepoInMemoryV1Test : TodoRepoBaseV1Test() {
         coEvery { testTestRepo.listTodo(capture(slotLs)) } coAnswers { repo.listTodo(slotLs.captured) }
     }
 
-//    @Test
-//    override fun createTodo() = super.createTodo()
-//
-//    @Test
-//    override fun readTodo() = super.readTodo()
-//
-//    @Test
-//    override fun updateTodo() = super.updateTodo()
-
     @Test
     override fun deleteTodo() = super.deleteTodo()
-
-//    @Test
-//    override fun listTodo() = super.listTodo()
 }
