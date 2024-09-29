@@ -41,12 +41,12 @@ class TodoRepoInMemory(
 
     override suspend fun createTodo(rq: DbTodoRequest): IDbTodoResponse = tryAdMethod {
         val key = randomUuid()
-        val ad = rq.todo.copy(id = TodoId(key))
-        val entity = TodoEntity(ad)
+        val todo = rq.todo.copy(id = TodoId(key))
+        val entity = TodoEntity(todo)
         mutex.withLock {
             cache.put(key, entity)
         }
-        DbTodoResponseOk(ad)
+        DbTodoResponseOk(todo)
     }
 
     override suspend fun readTodo(rq: DbTodoIdRequest): IDbTodoResponse = tryAdMethod {
@@ -93,11 +93,6 @@ class TodoRepoInMemory(
             }
         }
     }
-
-    /**
-     * Поиск объявлений по фильтру
-     * Если в фильтре не установлен какой-либо из параметров - по нему фильтрация не идет
-     */
     override suspend fun listTodo(rq: DbTodoListRequest): IDbTodosResponse = tryAdsMethod {
         val result: List<Todo> = cache.asMap().values.map { it.toInternal() }
         DbTodosResponseOk(result)

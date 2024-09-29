@@ -11,7 +11,8 @@ import ru.otus.todo.common.models.*
 
 fun Todo.toTransportCreate() = TaskCreateObject(
     title = title.takeIf { it.isNotBlank() },
-    description = description.takeIf { it.isNotBlank() }
+    description = description.takeIf { it.isNotBlank() },
+    status = status.toTransportStatus()
 )
 
 fun Todo.toTransportRead() = TaskReadObject(
@@ -22,7 +23,7 @@ fun Todo.toTransportUpdate() = TaskUpdateObject(
     id = id.takeIf { it != TodoId.NONE }?.asString(),
     title = title.takeIf { it.isNotBlank() },
     description = description.takeIf { it.isNotBlank() },
-    status = status.toTransportStatus() // Добавляем статус задачи
+    status = status.toTransportStatus()
 )
 
 fun Todo.toTransportDelete() = TaskDeleteObject(
