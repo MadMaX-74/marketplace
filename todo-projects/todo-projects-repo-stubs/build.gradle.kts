@@ -18,7 +18,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-//                implementation(projects.okMarketplaceRepoTests)
+                implementation(project(":todo-projects-repo-tests"))
             }
         }
         val jvmMain by getting {

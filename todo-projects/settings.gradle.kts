@@ -38,6 +38,7 @@ include(":todo-projects-app-journal")
 
 include(":todo-projects-repo-common")
 include(":todo-projects-repo-stubs")
+include(":todo-projects-repo-tests")
 include(":todo-projects-repo-inmemory")
 
 

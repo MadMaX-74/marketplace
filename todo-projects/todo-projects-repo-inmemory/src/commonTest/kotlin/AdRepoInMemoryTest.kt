@@ -1,38 +1,43 @@
-//import ru.otus.otuskotlin.marketplace.backend.repo.tests.*
-//import ru.otus.otuskotlin.marketplace.repo.common.AdRepoInitialized
-//import ru.otus.otuskotlin.marketplace.repo.inmemory.AdRepoInMemory
-//
-//class AdRepoInMemoryCreateTest : RepoAdCreateTest() {
-//    override val repo = AdRepoInitialized(
-//        AdRepoInMemory(randomUuid = { uuidNew.asString() }),
-//        initObjects = initObjects,
-//    )
-//}
-//
-//class AdRepoInMemoryDeleteTest : RepoAdDeleteTest() {
-//    override val repo = AdRepoInitialized(
-//        AdRepoInMemory(),
-//        initObjects = initObjects,
-//    )
-//}
-//
-//class AdRepoInMemoryReadTest : RepoAdReadTest() {
-//    override val repo = AdRepoInitialized(
-//        AdRepoInMemory(),
-//        initObjects = initObjects,
-//    )
-//}
-//
-//class AdRepoInMemorySearchTest : RepoAdSearchTest() {
-//    override val repo = AdRepoInitialized(
-//        AdRepoInMemory(),
-//        initObjects = initObjects,
-//    )
-//}
-//
-//class AdRepoInMemoryUpdateTest : RepoAdUpdateTest() {
-//    override val repo = AdRepoInitialized(
-//        AdRepoInMemory(randomUuid = { lockNew.asString() }),
-//        initObjects = initObjects,
-//    )
-//}
+import ru.otus.todo.repo.common.TodoRepoInitialized
+import ru.otus.todo.repo.inmemory.TodoRepoInMemory
+import ru.otus.todo.repo.tests.RepoTodoCreateTest
+import ru.otus.todo.repo.tests.RepoTodoDeleteTest
+import ru.otus.todo.repo.tests.RepoTodoListTest
+import ru.otus.todo.repo.tests.RepoTodoReadTest
+import ru.otus.todo.repo.tests.RepoTodoUpdateTest
+
+
+class TodoRepoInMemoryCreateTest : RepoTodoCreateTest() {
+    override val repo = TodoRepoInitialized(
+        TodoRepoInMemory(randomUuid = { uuidNew.asString() }),
+        initObjects = initObjects,
+    )
+}
+
+class TodoRepoInMemoryDeleteTest : RepoTodoDeleteTest() {
+    override val repo = TodoRepoInitialized(
+        TodoRepoInMemory(),
+        initObjects = initObjects,
+    )
+}
+
+class TodoRepoInMemoryReadTest : RepoTodoReadTest() {
+    override val repo = TodoRepoInitialized(
+        TodoRepoInMemory(),
+        initObjects = initObjects,
+    )
+}
+
+class TodoRepoInMemoryListTest : RepoTodoListTest() {
+    override val repo = TodoRepoInitialized(
+        TodoRepoInMemory(),
+        initObjects = initObjects,
+    )
+}
+
+class TodoRepoInMemoryUpdateTest : RepoTodoUpdateTest() {
+    override val repo = TodoRepoInitialized(
+        TodoRepoInMemory(),
+        initObjects = initObjects,
+    )
+}

@@ -7,6 +7,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":todo-projects-common"))
+                implementation(project(":todo-projects-repo-common"))
 
                 implementation(libs.coroutines.core)
                 implementation(libs.db.cache4k)
@@ -17,7 +18,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-//                implementation(projects.okMarketplaceRepoTests)
+                implementation(project(":todo-projects-repo-tests"))
             }
         }
         val jvmMain by getting {
