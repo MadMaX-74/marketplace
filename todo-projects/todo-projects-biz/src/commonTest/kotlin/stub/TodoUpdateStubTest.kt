@@ -21,8 +21,8 @@ class TodoUpdateStubTest {
     val title = "title 2"
     val description = "desc 2"
     val status = TodoStatus.IN_PROGRESS
-    val createdDate = "2020-01-01T00:00:00Z".toInstant()
-    val completedDate = "2024-01-01T00:00:00Z".toInstant()
+    val createdDate = "2020-01-01T00:00:00Z"
+    val completedDate = "2024-01-01T00:00:00Z"
 
     @Test
     fun update() = runTest {

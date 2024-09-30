@@ -22,7 +22,7 @@ class TodoCreateStubTest {
     val title = "title 1"
     val description = "desc 1"
     val status = TodoStatus.IN_PROGRESS
-    val createdDate = "2020-01-01T00:00:00Z".toInstant()
+    val createdDate = "2020-01-01T00:00:00Z"
     val completedDate = null
 
     @Test
