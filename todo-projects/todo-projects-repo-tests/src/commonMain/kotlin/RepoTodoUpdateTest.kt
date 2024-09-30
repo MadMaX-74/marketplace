@@ -26,8 +26,8 @@ abstract class RepoTodoUpdateTest {
             title = "update object",
             description = "update object description",
             status = TodoStatus.COMPLETED,
-            createdDate = Instant.DISTANT_PAST,
-            completedDate = Instant.DISTANT_FUTURE,
+            createdDate = Instant.DISTANT_PAST.toString(),
+            completedDate = Instant.DISTANT_FUTURE.toString(),
         )
     }
     private val reqUpdateNotFound = Todo(
@@ -35,8 +35,8 @@ abstract class RepoTodoUpdateTest {
         title = "update object not found",
         description = "update object not found description",
         status = TodoStatus.COMPLETED,
-        createdDate = Instant.DISTANT_PAST,
-        completedDate = Instant.DISTANT_FUTURE,
+        createdDate = Instant.DISTANT_PAST.toString(),
+        completedDate = Instant.DISTANT_FUTURE.toString(),
     )
     private val reqUpdateConc by lazy {
         Todo(
@@ -44,8 +44,8 @@ abstract class RepoTodoUpdateTest {
             title = "update object not found",
             description = "update object not found description",
             status = TodoStatus.COMPLETED,
-            createdDate = Instant.DISTANT_PAST,
-            completedDate = Instant.DISTANT_FUTURE,
+            createdDate = Instant.DISTANT_PAST.toString(),
+            completedDate = Instant.DISTANT_FUTURE.toString(),
         )
     }
 

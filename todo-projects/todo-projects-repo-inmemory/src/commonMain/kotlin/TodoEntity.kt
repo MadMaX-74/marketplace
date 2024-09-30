@@ -10,8 +10,8 @@ data class TodoEntity(
     val title: String? = null,
     val description: String? = null,
     var status: TodoStatus = TodoStatus.NONE,
-    var createdDate: Instant = Instant.DISTANT_PAST,
-    var completedDate: Instant? = null
+    var createdDate: String? = null,
+    var completedDate: String? = null
 ) {
     constructor(model: Todo) : this(
         id = model.id.asString().takeIf { it.isNotBlank() },

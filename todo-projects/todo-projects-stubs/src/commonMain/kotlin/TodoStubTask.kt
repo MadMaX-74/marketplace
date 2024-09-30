@@ -13,7 +13,7 @@ object TodoStubTask {
             title = "title1",
             description = "description1",
             status = TodoStatus.IN_PROGRESS,
-            createdDate = Instant.DISTANT_PAST,
+            createdDate = "2021-01-01T00:00:00Z",
             completedDate = null
         )
     val TASK_COMPLETED = TASK_IN_PROGRESS.copy(status = TodoStatus.COMPLETED)

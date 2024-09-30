@@ -13,7 +13,7 @@ abstract class BaseInitTodos(private val op: String): IInitObjects<Todo> {
             title = "title-${suf}-${op}",
             description = "description-${suf}-${op}",
             status = TodoStatus.COMPLETED,
-            createdDate = Instant.DISTANT_PAST,
-            completedDate = Instant.DISTANT_FUTURE,
+            createdDate = Instant.DISTANT_PAST.toString(),
+            completedDate = Instant.DISTANT_FUTURE.toString(),
         )
 }

@@ -24,7 +24,7 @@ fun validationIdCorrect(command: TodoCommand, processor: TodoProcessor) = runTes
             title = "abc",
             description = "abc",
             status = TodoStatus.IN_PROGRESS,
-            createdDate = Instant.parse("2020-01-01T00:00:00Z"),
+            createdDate = "2020-01-01T00:00:00Z",
             completedDate = null,
         ),
     )
@@ -43,7 +43,7 @@ fun validationIdEmpty(command: TodoCommand, processor: TodoProcessor) = runTest 
             title = "abc",
             description = "abc",
             status = TodoStatus.IN_PROGRESS,
-            createdDate = Instant.parse("2020-01-01T00:00:00Z"),
+            createdDate = "2020-01-01T00:00:00Z",
             completedDate = null
         ),
     )

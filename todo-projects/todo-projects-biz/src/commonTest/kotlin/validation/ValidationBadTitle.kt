@@ -27,7 +27,7 @@ fun validationTitleCorrect(command: TodoCommand, processor: TodoProcessor) = run
             title = "abc",
             description = "abc",
             status = TodoStatus.IN_PROGRESS,
-            createdDate = Instant.parse("2020-01-01T00:00:00Z"),
+            createdDate = "2020-01-01T00:00:00Z",
             completedDate = null,
         ),
     )
@@ -48,7 +48,7 @@ fun validationTitleEmpty(command: TodoCommand, processor: TodoProcessor) = runTe
             title = "",
             description = "abc",
             status = TodoStatus.IN_PROGRESS,
-            createdDate = Instant.parse("2020-01-01T00:00:00Z"),
+            createdDate = "2020-01-01T00:00:00Z",
             completedDate = null,
         ),
     )
@@ -70,7 +70,7 @@ fun validationTitleSymbols(command: TodoCommand, processor: TodoProcessor) = run
             title = "!@#$%^&*(),.{}",
             description = "abc",
             status = TodoStatus.IN_PROGRESS,
-            createdDate = Instant.parse("2020-01-01T00:00:00Z"),
+            createdDate = "2020-01-01T00:00:00Z",
             completedDate = null,
         ),
     )

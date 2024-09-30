@@ -15,7 +15,6 @@ import ru.otus.todo.common.repo.IDbTodoResponse
 import ru.otus.todo.common.repo.IDbTodosResponse
 import ru.otus.todo.common.repo.IRepoTodo
 import ru.otus.todo.common.repo.TodoRepoBase
-import ru.otus.todo.common.repo.errorDb
 import ru.otus.todo.common.repo.errorEmptyId
 import ru.otus.todo.common.repo.errorNotFound
 import ru.otus.todo.repo.common.IRepoTodoInitializable

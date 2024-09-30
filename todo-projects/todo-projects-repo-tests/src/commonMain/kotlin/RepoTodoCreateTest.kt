@@ -18,8 +18,8 @@ abstract class RepoTodoCreateTest {
         title = "create object",
         description = "create object description",
         status = TodoStatus.COMPLETED,
-        createdDate = Instant.DISTANT_PAST,
-        completedDate = Instant.DISTANT_FUTURE,
+        createdDate = Instant.DISTANT_PAST.toString(),
+        completedDate = Instant.DISTANT_FUTURE.toString(),
     )
 
     @Test

@@ -23,7 +23,7 @@ object TodoStub {
         title = "Task $id",
         description = "Description of task $id",
         status = status,
-        createdDate = Clock.System.now(),
-        completedDate = if (status == TodoStatus.COMPLETED) Clock.System.now() else null
+        createdDate = Clock.System.now().toString(),
+        completedDate = if (status == TodoStatus.COMPLETED) Clock.System.now().toString() else null
     )
 }
