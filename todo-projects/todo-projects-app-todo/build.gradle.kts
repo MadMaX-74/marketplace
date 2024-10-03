@@ -36,7 +36,11 @@ dependencies {
     // DB
     implementation(project(":todo-projects-repo-stubs"))
     implementation(project(":todo-projects-repo-inmemory"))
+    implementation(project(":todo-projects-repo-postgres"))
     implementation(project(":todo-projects-repo-common"))
+
+    // stubs
+    testImplementation(project(":todo-projects-stubs"))
 
     // tests
     testImplementation(kotlin("test-junit5"))
@@ -47,8 +51,7 @@ dependencies {
     testImplementation(libs.spring.mockk)
 
 
-    // stubs
-    testImplementation(project(":todo-projects-stubs"))
+
 }
 
 tasks {

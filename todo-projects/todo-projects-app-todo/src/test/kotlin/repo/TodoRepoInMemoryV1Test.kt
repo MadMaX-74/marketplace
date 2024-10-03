@@ -13,6 +13,7 @@ import com.ninjasquad.springmockk.MockkBean
 import io.mockk.coEvery
 import io.mockk.slot
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.context.annotation.Import
 import ru.otus.todo.app.todo.services.RabbitMQSender
 import ru.otus.todo.common.models.TodoStatus
 import ru.otus.todo.common.repo.DbTodoIdRequest
@@ -22,8 +23,11 @@ import ru.otus.todo.repo.common.TodoRepoInitialized
 import ru.otus.todo.repo.inmemory.TodoRepoInMemory
 import ru.otus.todo.stubs.TodoStub
 
-// Temporary simple test with stubs
-@WebFluxTest(TodoControllerV1::class, TodoConfig::class)
+@WebFluxTest(
+    TodoControllerV1::class, TodoConfig::class,
+    properties = ["spring.main.allow-bean-definition-overriding=true"]
+)
+@Import(RepoInMemoryConfig::class)
 internal class TodoRepoInMemoryV1Test : TodoRepoBaseV1Test() {
     @Autowired
     override lateinit var webClient: WebTestClient

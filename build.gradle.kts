@@ -19,8 +19,16 @@ subprojects {
 }
 
 tasks {
+    val buildImages: Task by creating {
+        dependsOn(gradle.includedBuild("todo-projects").task(":buildImages"))
+    }
+    val e2eTests: Task by creating {
+        dependsOn(gradle.includedBuild("todo-projects-tests").task(":e2eTests"))
+        mustRunAfter(buildImages)
+    }
     create("check") {
         group = "verification"
-        dependsOn(gradle.includedBuild("todo-projects").task(":check"))
+        dependsOn(buildImages)
+        dependsOn(e2eTests)
     }
 }
