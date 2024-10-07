@@ -1,6 +1,6 @@
-package repo
+package ru.otus.todo.common.repo
 
-import helpers.errorSystem
+import ru.otus.todo.common.helpers.errorSystem
 
 
 abstract class TodoRepoBase: IRepoTodo {

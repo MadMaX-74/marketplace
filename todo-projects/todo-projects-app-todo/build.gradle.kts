@@ -33,15 +33,25 @@ dependencies {
     // biz
     implementation(project(":todo-projects-biz"))
 
+    // DB
+    implementation(project(":todo-projects-repo-stubs"))
+    implementation(project(":todo-projects-repo-inmemory"))
+    implementation(project(":todo-projects-repo-postgres"))
+    implementation(project(":todo-projects-repo-common"))
+
+    // stubs
+    testImplementation(project(":todo-projects-stubs"))
+
     // tests
     testImplementation(kotlin("test-junit5"))
     testImplementation(libs.spring.test)
     testImplementation(libs.testcontainers.core)
     testImplementation(libs.testcontainers.rabbitmq)
     testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.spring.mockk)
 
-    // stubs
-    testImplementation(project(":todo-projects-stubs"))
+
+
 }
 
 tasks {

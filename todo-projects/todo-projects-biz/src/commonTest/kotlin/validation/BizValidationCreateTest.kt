@@ -1,6 +1,6 @@
 package ru.otus.todo.biz.validation
 
-import models.TodoCommand
+import ru.otus.todo.common.models.TodoCommand
 import kotlin.test.Test
 
 class BizValidationCreateTest: BaseBizValidationTest() {

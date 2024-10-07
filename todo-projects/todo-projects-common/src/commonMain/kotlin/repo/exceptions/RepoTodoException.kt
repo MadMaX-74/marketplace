@@ -1,7 +1,7 @@
-package repo.exceptions
+package ru.otus.todo.common.repo.exceptions
 
+import ru.otus.todo.common.models.TodoId
 
-import models.TodoId
 
 open class RepoTodoException(
     @Suppress("unused")

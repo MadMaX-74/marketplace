@@ -1,13 +1,13 @@
-package ru.otus.otuskotlin.marketplace.repo.common
+package ru.otus.todo.repo.common
 
-import models.Todo
+import ru.otus.todo.common.models.Todo
 
 
 /**
  * Делегат для всех репозиториев, позволяющий инициализировать базу данных предзагруженными данными
  */
 class TodoRepoInitialized(
-    private val repo: IRepoTodoInitializable,
+    val repo: IRepoTodoInitializable,
     initObjects: Collection<Todo> = emptyList(),
 ) : IRepoTodoInitializable by repo {
     @Suppress("unused")

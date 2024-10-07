@@ -1,11 +1,17 @@
 package ru.otus.todo.biz.stub
 
-import TodoContext
+
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.toInstant
-import models.*
 import ru.otus.todo.biz.TodoProcessor
-import stubs.TodoStubs
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.Todo
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoId
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.models.TodoWorkMode
+import ru.otus.todo.common.stubs.TodoStubs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -15,8 +21,8 @@ class TodoUpdateStubTest {
     val title = "title 2"
     val description = "desc 2"
     val status = TodoStatus.IN_PROGRESS
-    val createdDate = "2020-01-01T00:00:00Z".toInstant()
-    val completedDate = "2024-01-01T00:00:00Z".toInstant()
+    val createdDate = "2020-01-01T00:00:00Z"
+    val completedDate = "2024-01-01T00:00:00Z"
 
     @Test
     fun update() = runTest {

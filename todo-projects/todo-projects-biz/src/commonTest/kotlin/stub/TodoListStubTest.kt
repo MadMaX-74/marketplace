@@ -1,11 +1,15 @@
 package ru.otus.todo.biz.stub
 
-import TodoContext
+
 import kotlinx.coroutines.test.runTest
-import models.*
 import ru.otus.todo.biz.TodoProcessor
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.common.models.TodoStatus
+import ru.otus.todo.common.models.TodoWorkMode
+import ru.otus.todo.common.stubs.TodoStubs
 import ru.otus.todo.stubs.TodoStub
-import stubs.TodoStubs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

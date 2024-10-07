@@ -1,8 +1,9 @@
 package ru.otus.todo.biz.validation
 
-import TodoContext
-import helpers.errorValidation
-import helpers.fail
+
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.helpers.errorValidation
+import ru.otus.todo.common.helpers.fail
 import ru.otus.todo.cor.ICorChainDsl
 import ru.otus.todo.cor.worker
 

@@ -1,12 +1,13 @@
 package ru.otus.todo.biz.stubs
 
-import TodoContext
-import helpers.fail
-import models.TodoError
-import models.TodoState
+
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.helpers.fail
+import ru.otus.todo.common.models.TodoError
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.common.stubs.TodoStubs
 import ru.otus.todo.cor.ICorChainDsl
 import ru.otus.todo.cor.worker
-import stubs.TodoStubs
 
 
 fun ICorChainDsl<TodoContext>.stubValidationBadDescription(title: String) = worker {

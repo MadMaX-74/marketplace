@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "url": "/v1/ad/offers"
+    "url": "/v1/task/list"
   },
   "response": {
     "status": 200,

@@ -1,8 +1,8 @@
-package helpers
+package ru.otus.todo.common.helpers
 
-import TodoContext
-import models.TodoError
-import models.TodoState
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.models.TodoError
+import ru.otus.todo.common.models.TodoState
 
 fun Throwable.asTodoError(
     code: String = "unknown",
@@ -15,10 +15,16 @@ fun Throwable.asTodoError(
     message = message,
     exception = this,
 )
-inline fun TodoContext.addError(vararg error: TodoError) = errors.addAll(error)
+inline fun TodoContext.addError(error: TodoError) = errors.add(error)
+inline fun TodoContext.addErrors(error: Collection<TodoError>) = errors.addAll(error)
 
 inline fun TodoContext.fail(error: TodoError) {
     addError(error)
+    state = TodoState.FAILING
+}
+
+inline fun TodoContext.fail(errors: Collection<TodoError>) {
+    addErrors(errors)
     state = TodoState.FAILING
 }
 

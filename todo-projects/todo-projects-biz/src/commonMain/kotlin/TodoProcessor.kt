@@ -1,14 +1,14 @@
 package ru.otus.todo.biz
 
-import TodoContext
-import TodoCorSettings
-import models.TodoCommand
-import models.TodoId
 import ru.otus.todo.biz.general.initStatus
 import ru.otus.todo.biz.general.operation
 import ru.otus.todo.biz.general.stubs
 import ru.otus.todo.biz.stubs.*
 import ru.otus.todo.biz.validation.*
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.TodoCorSettings
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoId
 import ru.otus.todo.cor.rootChain
 import ru.otus.todo.cor.worker
 

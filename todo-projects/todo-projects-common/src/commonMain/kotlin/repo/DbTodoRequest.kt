@@ -1,6 +1,7 @@
-package repo
+package ru.otus.todo.common.repo
 
-import models.Todo
+import ru.otus.todo.common.models.Todo
+
 
 data class DbTodoRequest(
     val todo: Todo

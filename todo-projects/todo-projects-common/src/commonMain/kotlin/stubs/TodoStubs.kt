@@ -1,4 +1,4 @@
-package stubs
+package ru.otus.todo.common.stubs
 
 enum class TodoStubs {
     NONE,

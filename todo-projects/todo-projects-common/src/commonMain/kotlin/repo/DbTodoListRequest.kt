@@ -1,4 +1,4 @@
-package repo
+package ru.otus.todo.common.repo
 
 
 

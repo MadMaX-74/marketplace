@@ -1,10 +1,11 @@
 package ru.otus.todo.app.common
 
-import TodoContext
+
 import kotlinx.datetime.Clock
-import models.TodoCommand
-import models.TodoState
-import helpers.asTodoError
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.helpers.asTodoError
+import ru.otus.todo.common.models.TodoCommand
+import ru.otus.todo.common.models.TodoState
 
 suspend inline fun <T> TodoAppSettings.controllerHelper(
     crossinline getRequest: suspend TodoContext.() -> Unit,

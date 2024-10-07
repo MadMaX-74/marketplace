@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "POST",
-    "url": "/v1/ad/update"
+    "url": "/v1/task/update"
   },
 
   "response": {

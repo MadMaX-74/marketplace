@@ -1,9 +1,9 @@
 package ru.otus.todo.mapper
 
-import TodoContext
-import exceptions.UnknownTodoCommand
-import models.*
 import ru.otus.todo.api.v1.models.*
+import ru.otus.todo.common.TodoContext
+import ru.otus.todo.common.exceptions.UnknownTodoCommand
+import ru.otus.todo.common.models.*
 
 
 fun TodoContext.toTransportTodo(): IResponse = when (val cmd = command) {
@@ -52,7 +52,7 @@ fun List<Todo>.toTransportTasks(): List<TaskResponseObject>? = this
     .takeIf { it.isNotEmpty() }
 
 private fun Todo.toTransportTask(): TaskResponseObject = TaskResponseObject(
-    id = if (id != TodoId.NONE) id.asString() else null,
+    id = id.takeIf { it != TodoId.NONE }?.asString(),
     title = title.takeIf { it.isNotBlank() == true },
     description = description.takeIf { it.isNotBlank() == true },
     status = status.toTransportTask()
