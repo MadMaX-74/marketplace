@@ -58,7 +58,7 @@ dependencies {
     liquibaseRuntime(libs.db.postgres)
 }
 
-var pgPort = 5432
+var pgPort = 5433
 val taskGroup = "pgContainer"
 val pgDbName = "todos_ads"
 val pgUsername = "postgres"

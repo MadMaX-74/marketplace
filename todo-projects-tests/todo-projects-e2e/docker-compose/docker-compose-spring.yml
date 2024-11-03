@@ -3,6 +3,6 @@
 version: '3'
 services:
   app-spring:
-    image: ok-marketplace-app-spring:latest
+    image: todo-projects-app-todo:1.0.0
     ports:
       - "8080:8080"
