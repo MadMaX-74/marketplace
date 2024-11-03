@@ -66,9 +66,6 @@ val pgPassword = "todos-pass"
 val containerStarted = AtomicBoolean(false)
 
 tasks {
-    // Здесь в тасках запускаем PotgreSQL в контейнере
-    // Накатываем liquibase миграцию
-    // Передаем настройки в среду тестирования
     val postgresImage = "postgres:latest"
     val pullImage by creating(DockerPullImage::class) {
         group = taskGroup

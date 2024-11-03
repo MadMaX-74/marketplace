@@ -37,6 +37,6 @@ psql:
   schema: public
   database: "${MKPLADS_DB:todos-ads}"
   host: "${MKPLADS_HOST:localhost}"
-  port: "${MKPLADS_PORT:5433}"
+  port: "${MKPLADS_PORT:5432}"
   user: "${MKPLADS_USER:postgres}"
   password: "${MKPLADS_PASS:todos-pass}"
