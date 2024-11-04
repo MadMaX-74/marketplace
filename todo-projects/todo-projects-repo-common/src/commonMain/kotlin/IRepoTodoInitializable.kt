@@ -4,5 +4,5 @@ import ru.otus.todo.common.models.Todo
 import ru.otus.todo.common.repo.IRepoTodo
 
 interface IRepoTodoInitializable: IRepoTodo {
-    fun save(ads: Collection<Todo>): Collection<Todo>
+    fun save(todos: Collection<Todo>): Collection<Todo>
 }

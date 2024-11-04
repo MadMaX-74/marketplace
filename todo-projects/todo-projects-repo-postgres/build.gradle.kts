@@ -79,8 +79,8 @@ tasks {
         withEnvVar("POSTGRES_USER", pgUsername)
         withEnvVar("POSTGRES_DB", pgDbName)
         healthCheck.cmd("pg_isready")
-        hostConfig.portBindings.set(listOf(":5432"))
-        exposePorts("tcp", listOf(5432))
+        hostConfig.portBindings.set(listOf(":5433"))
+        exposePorts("tcp", listOf(5433))
         hostConfig.autoRemove.set(true)
     }
     val stopPg by creating(DockerStopContainer::class) {
@@ -143,13 +143,6 @@ tasks {
         finalizedBy(stopPg)
         doFirst {
             println("PORT: $pgPort")
-        }
-    }
-    withType(KotlinNativeTest::class).configureEach {
-        dependsOn(liquibaseUpdate)
-        finalizedBy(stopPg)
-        doFirst {
-            environment("postgresPort", pgPort.toString())
         }
     }
     withType(Test::class).configureEach {

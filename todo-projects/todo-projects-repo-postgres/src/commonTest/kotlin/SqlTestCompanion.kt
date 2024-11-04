@@ -9,7 +9,7 @@ object SqlTestCompanion {
     private const val HOST = "localhost"
     private const val USER = "postgres"
     private const val PASS = "marketplace-pass"
-    val PORT = getEnv("postgresPort")?.toIntOrNull() ?: 5432
+    val PORT = getEnv("postgresPort")?.toIntOrNull() ?: 5433
 
     fun repoUnderTestContainer(
         initObjects: Collection<Todo> = emptyList(),

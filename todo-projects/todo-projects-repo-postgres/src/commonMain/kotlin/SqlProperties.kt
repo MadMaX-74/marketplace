@@ -2,7 +2,7 @@ package ru.otus.todo.repo.postgresql
 
 data class SqlProperties(
     val host: String = "localhost",
-    val port: Int = 5432,
+    val port: Int = 5433,
     val user: String = "postgres",
     val password: String = "todos-pass",
     val database: String = "todos_ads",

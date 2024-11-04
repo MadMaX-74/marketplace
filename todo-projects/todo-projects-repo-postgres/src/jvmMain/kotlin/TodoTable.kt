@@ -3,7 +3,6 @@ package ru.otus.todo.repo.postgresql
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
-import org.jetbrains.exposed.sql.jodatime.datetime
 import ru.otus.todo.common.models.Todo
 import ru.otus.todo.common.models.TodoId
 import ru.otus.todo.common.models.TodoStatus
@@ -15,7 +14,7 @@ class TodoTable(tableName: String) : Table(tableName) {
     val id = text(SqlFields.ID)
     val title = text(SqlFields.TITLE).nullable()
     val description = text(SqlFields.DESCRIPTION).nullable()
-    val status = text(SqlFields.STATUS)
+    val status = statusEnumeration(SqlFields.STATUS)
     val createdDate = text(CREATED_DATE)
     val completedDate = text(COMPLETED_DATE).nullable()
 
@@ -25,7 +24,7 @@ class TodoTable(tableName: String) : Table(tableName) {
         id = TodoId(res[id].toString()),
         title = res[title] ?: "",
         description = res[description] ?: "",
-        status = res[status].let { TodoStatus.valueOf(it) },
+        status = res[status],
         createdDate = res[createdDate].toString(),
         completedDate = res[completedDate]?.toString()
     )
@@ -34,9 +33,9 @@ class TodoTable(tableName: String) : Table(tableName) {
         it[id] = todo.id.takeIf { it != TodoId.NONE }?.asString() ?: randomUuid()
         it[title] = todo.title
         it[description] = todo.description
-        it[status] = todo.status.name
+        it[status] = todo.status
         it[createdDate] = todo.createdDate.toString()
-        it[completedDate] = todo.completedDate?.toString()
+        it[completedDate] = todo.completedDate
     }
 
 
