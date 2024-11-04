@@ -6,7 +6,7 @@ import ru.otus.todo.repo.postgresql.SqlProperties
 
 @ConfigurationProperties(prefix = "psql")
 class TodoConfigPostgres(var host: String = "localhost",
-                         var port: Int = 5432,
+                         var port: Int = 5433,
                          var user: String = "postgres",
                          var password: String = "todos-pass",
                          var database: String = "todos_ads",
