@@ -11,7 +11,7 @@ import ru.otus.todo.cor.ICorChainDsl
 import ru.otus.todo.cor.worker
 
 
-fun ICorChainDsl<TodoContext>.repoRetodo(title: String) = worker {
+fun ICorChainDsl<TodoContext>.repoReadTodo(title: String) = worker {
     this.title = title
     description = "Чтение объявления из БД"
     on { state == TodoState.RUNNING }

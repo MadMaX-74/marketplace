@@ -7,6 +7,7 @@ data class TodoCorSettings(
     val repoStub: IRepoTodo = IRepoTodo.NONE,
     val repoTest: IRepoTodo = IRepoTodo.NONE,
     val repoProd: IRepoTodo = IRepoTodo.NONE,
+//    val stateSettings: TodoStatesCorSettings = TodoStatesCorSettings(),
 ) {
     companion object {
         val NONE = TodoCorSettings()

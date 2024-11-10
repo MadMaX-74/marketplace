@@ -10,15 +10,17 @@ import ru.otus.todo.cor.ICorChainDsl
 import ru.otus.todo.cor.worker
 
 
-fun ICorChainDsl<TodoContext>.repoSearch(title: String) = worker {
+fun ICorChainDsl<TodoContext>.repoList(title: String) = worker {
     this.title = title
     description = "Поиск объявлений в БД по фильтру"
     on { state == TodoState.RUNNING }
     handle {
-        val request = DbTodoListRequest()
-        when(val result = todoRepo.listTodo(request)) {
-            is DbTodosResponseOk -> todosRepoDone = result.data.toMutableList()
-            is DbTodosResponseErr -> fail(result.errors)
+        val todoRequest = todoRepoPrepare
+        val list = DbTodoListRequest()
+
+        when (val dbResponse = todoRepo.listTodo(list)) {
+            is DbTodosResponseOk -> todosRepoDone = dbResponse.data.toMutableList()
+            is DbTodosResponseErr -> fail(dbResponse.errors)
         }
     }
 }

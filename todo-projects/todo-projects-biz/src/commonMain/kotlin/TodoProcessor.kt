@@ -3,12 +3,15 @@ package ru.otus.todo.biz
 import ru.otus.todo.biz.general.initStatus
 import ru.otus.todo.biz.general.operation
 import ru.otus.todo.biz.general.stubs
+import ru.otus.todo.biz.repo.*
 import ru.otus.todo.biz.stubs.*
 import ru.otus.todo.biz.validation.*
 import ru.otus.todo.common.TodoContext
 import ru.otus.todo.common.TodoCorSettings
 import ru.otus.todo.common.models.TodoCommand
 import ru.otus.todo.common.models.TodoId
+import ru.otus.todo.common.models.TodoState
+import ru.otus.todo.cor.chain
 import ru.otus.todo.cor.rootChain
 import ru.otus.todo.cor.worker
 
@@ -18,8 +21,9 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
 
     private val businessChain = rootChain<TodoContext> {
         initStatus("Инициализация статуса")
+        initRepo("Инициализация репозитория")
 
-        operation("Создание объявления", TodoCommand.CREATE) {
+        operation("Создание задачи", TodoCommand.CREATE) {
             stubs("Обработка стабов") {
                 stubCreateSuccess("Имитация успешной обработки", corSettings)
                 stubValidationBadTitle("Имитация ошибки валидации заголовка")
@@ -37,8 +41,14 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 validateCreatedDateNotEmpty("Проверка даты")
                 finishTodoValidation("Завершение проверок")
             }
+            chain {
+                title = "Логика сохранения"
+                repoPrepareCreate("Подготовка объекта для сохранения")
+                repoCreate("Создание объявления в БД")
+            }
+            prepareResult("Подготовка ответа")
         }
-        operation("Получить объявление", TodoCommand.READ) {
+        operation("Получить задачи", TodoCommand.READ) {
             stubs("Обработка стабов") {
                 stubReadSuccess("Имитация успешной обработки", corSettings)
                 stubValidationBadId("Имитация ошибки валидации id")
@@ -49,11 +59,20 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 worker("Копируем поля в todoValidating") { todoValidating = todoRequest.deepCopy() }
                 worker("Очистка id") { todoValidating.id = TodoId(todoValidating.id.asString().trim())}
                 validateIdNotEmpty("Проверка на непустой id")
-                validateTitleNotEmpty("Проверка, что заголовок не пуст")
                 finishTodoValidation("Успешное завершение процедуры валидации")
             }
+            chain {
+                title = "Логика чтения"
+                repoReadTodo("Чтение объявления из БД")
+                worker {
+                    title = "Подготовка ответа для Read"
+                    on { state == TodoState.RUNNING }
+                    handle { todoRepoDone = todoRepoRead }
+                }
+            }
+            prepareResult("Подготовка ответа")
         }
-        operation("Изменить объявление", TodoCommand.UPDATE) {
+        operation("Изменить задачу", TodoCommand.UPDATE) {
             stubs("Обработка стабов") {
                 stubUpdateSuccess("Имитация успешной обработки", corSettings)
                 stubValidationBadId("Имитация ошибки валидации id")
@@ -75,8 +94,15 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
 
                 finishTodoValidation("Успешное завершение процедуры валидации")
             }
+            chain {
+                title = "Логика сохранения"
+                repoReadTodo("Чтение объявления из БД")
+                repoPrepareUpdate("Подготовка объекта для обновления")
+                repoUpdate("Обновление объявления в БД")
+            }
+            prepareResult("Подготовка ответа")
         }
-        operation("Удалить задачи", TodoCommand.DELETE) {
+        operation("Удалить задачу", TodoCommand.DELETE) {
             stubs("Обработка стабов") {
                 stubDeleteSuccess("Имитация успешной обработки", corSettings)
                 stubValidationBadId("Имитация ошибки валидации id")
@@ -92,6 +118,13 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 validateIdNotEmpty("Проверка на непустой id")
                 finishTodoValidation("Успешное завершение процедуры валидации")
             }
+            chain {
+                title = "Логика удаления"
+                repoReadTodo("Чтение объявления из БД")
+                repoPrepareDelete("Подготовка объекта для удаления")
+                repoDelete("Удаление объявления из БД")
+            }
+            prepareResult("Подготовка ответа")
         }
         operation("Возврат списка задач", TodoCommand.LIST) {
             stubs("Обработка стабов") {
@@ -100,6 +133,8 @@ class TodoProcessor(private val corSettings: TodoCorSettings = TodoCorSettings.N
                 stubDbError("Имитация ошибки работы с БД")
                 stubNoCase("Ошибка: запрошенный стаб недопустим")
             }
+            repoList("Чтение списка задач из БД")
+            prepareResult("Подготовка ответа")
         }
     }.build()
 }

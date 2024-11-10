@@ -96,7 +96,7 @@ internal abstract class TodoRepoBaseV1Test {
                 .sortedBy { it.id.asString() }
                 .toMutableList()
         )
-            .toTransportList().copy(responseType = "search")
+            .toTransportList().copy(responseType = "list")
     )
 
     private fun prepareCtx(todo: Todo) = TodoContext(

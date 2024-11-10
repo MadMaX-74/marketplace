@@ -53,8 +53,8 @@ fun List<Todo>.toTransportTasks(): List<TaskResponseObject>? = this
 
 private fun Todo.toTransportTask(): TaskResponseObject = TaskResponseObject(
     id = id.takeIf { it != TodoId.NONE }?.asString(),
-    title = title.takeIf { it.isNotBlank() == true },
-    description = description.takeIf { it.isNotBlank() == true },
+    title = title.takeIf { it.isNotBlank() },
+    description = description.takeIf { it.isNotBlank() },
     status = status.toTransportTask()
 )
 
