@@ -4,6 +4,11 @@ plugins {
     id("build-jvm") // Плагин для JVM
 }
 
+application {
+    mainClass = "ru.otus.todo.app.journal.ApplicationKt"
+}
+
+
 dependencies {
     implementation(libs.ktor.server.core) // Основные зависимости для Ktor
     implementation(libs.ktor.server.cio)

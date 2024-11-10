@@ -1,7 +1,6 @@
 package ru.otus.todo.biz.validation
 
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Instant
 import ru.otus.todo.biz.TodoProcessor
 import ru.otus.todo.common.TodoContext
 import ru.otus.todo.common.models.Todo
@@ -32,6 +31,7 @@ fun validationTitleCorrect(command: TodoCommand, processor: TodoProcessor) = run
         ),
     )
     processor.exec(ctx)
+    println("Errors: ${ctx.errors}")
     assertEquals(0, ctx.errors.size)
     assertNotEquals(TodoState.FAILING, ctx.state)
     assertEquals("abc", ctx.todoValidated.title)
