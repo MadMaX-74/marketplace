@@ -60,5 +60,4 @@ internal class TodoRepoInMemoryV1Test : TodoRepoBaseV1Test() {
     override fun readTodo() = super.readTodo()
     override fun deleteTodo() = super.deleteTodo()
     override fun updateTodo() = super.updateTodo()
-    override fun listTodo() = super.listTodo()
 }

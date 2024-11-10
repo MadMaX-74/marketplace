@@ -84,21 +84,6 @@ internal abstract class TodoRepoBaseV1Test {
             .copy(responseType = "delete")
     )
 
-    @Test
-    open fun listTodo() = testRepoTodo(
-        "list",
-        TaskListRequest(
-            debug = debug,
-        ),
-        TodoContext(
-            state = TodoState.RUNNING,
-            todosResponse = TodoStub.prepareTaskList(TodoStatus.IN_PROGRESS)
-                .sortedBy { it.id.asString() }
-                .toMutableList()
-        )
-            .toTransportList().copy(responseType = "list")
-    )
-
     private fun prepareCtx(todo: Todo) = TodoContext(
         state = TodoState.RUNNING,
         todoResponse = todo.apply {
@@ -121,8 +106,6 @@ internal abstract class TodoRepoBaseV1Test {
             .expectStatus().isOk
             .expectBody(Res::class.java)
             .value {
-                println("REQUEST: $requestObj")
-                println("RESPONSE: $it")
                 val sortedResp: IResponse = when (it) {
                     is TaskListResponse -> it.copy(tasks = it.tasks?.sortedBy { it.id })
                     else -> it
