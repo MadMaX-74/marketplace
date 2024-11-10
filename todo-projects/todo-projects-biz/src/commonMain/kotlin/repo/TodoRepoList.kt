@@ -12,10 +12,9 @@ import ru.otus.todo.cor.worker
 
 fun ICorChainDsl<TodoContext>.repoList(title: String) = worker {
     this.title = title
-    description = "Поиск объявлений в БД по фильтру"
+    description = "Список заданий в БД"
     on { state == TodoState.RUNNING }
     handle {
-        val todoRequest = todoRepoPrepare
         val list = DbTodoListRequest()
 
         when (val dbResponse = todoRepo.listTodo(list)) {

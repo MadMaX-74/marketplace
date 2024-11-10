@@ -35,8 +35,8 @@ marketplace:
 
 psql:
   schema: public
-  database: "${MKPLADS_DB:todos-ads}"
+  database: "${MKPLADS_DB:todos}"
   host: "${MKPLADS_HOST:localhost}"
-  port: "${MKPLADS_PORT:5432}"
+  port: "${MKPLADS_PORT:5433}"
   user: "${MKPLADS_USER:postgres}"
   password: "${MKPLADS_PASS:todos-pass}"

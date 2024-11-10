@@ -72,8 +72,10 @@ class TodoControllerV1(
 
 
     @PostMapping("list")
-    suspend fun  offers(@RequestBody request: TaskListRequest): TaskListResponse =
-        process(appSettings, request = request)
+    suspend fun list(@RequestBody request: TaskListRequest): TaskListResponse {
+        println("Incoming request: $request")
+        return process(appSettings, request = request)
+    }
 
     companion object {
         suspend inline fun <reified Q : IRequest, reified R : IResponse> process(

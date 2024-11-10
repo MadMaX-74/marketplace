@@ -112,11 +112,7 @@ actual class RepoTodoSql actual constructor(
 
     actual override suspend fun listTodo(rq: DbTodoListRequest): IDbTodosResponse =
         transactionWrapper({
-            val res = todoTable.selectAll().where {
-                buildList {
-                    add(Op.TRUE)
-                }.reduce { a, b -> (a and b) as Op.TRUE }
-            }
+            val res = todoTable.selectAll()
             DbTodosResponseOk(data = res.map { todoTable.from(it) })
         }, {
             DbTodosResponseErr(it.asTodoError())

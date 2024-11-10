@@ -15,6 +15,6 @@ class ApplicationTests {
     @Test
     fun contextLoads() {
         assertEquals(5433, pgConf.psql.port)
-        assertEquals("test_db", pgConf.psql.database)
+        assertEquals("todos-ads", pgConf.psql.database)
     }
 }
