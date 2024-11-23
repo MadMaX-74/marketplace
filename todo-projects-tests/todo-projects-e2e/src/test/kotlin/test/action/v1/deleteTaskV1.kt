@@ -17,7 +17,7 @@ suspend fun Client.deleteTask(task: TaskResponseObject) {
         val response = sendAndReceive(
             "ad/delete",
             TaskDeleteRequest(
-                debug = debug,
+                debug = debugStubV1,
                 task = TaskDeleteObject(id = id)
             )
         ) as TaskDeleteResponse

@@ -24,7 +24,7 @@ suspend fun <T> Client.createTask(task: TaskCreateObject = someCreateTask, block
         val response = sendAndReceive(
             "task/create", TaskCreateRequest(
                 requestType = "create",
-                debug = debug,
+                debug = debugStubV1,
                 task = task
             )
         ) as TaskCreateResponse

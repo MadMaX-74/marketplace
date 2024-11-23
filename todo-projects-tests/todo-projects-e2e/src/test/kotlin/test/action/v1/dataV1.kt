@@ -4,7 +4,7 @@ import ru.otus.todo.api.v1.models.*
 import ru.otus.todo.tests.e2e.test.TestDebug
 
 
-val debugStubV1 = TaskDebug(mode = TaskDebugMode.TEST, stub = TaskRequestDebugStubs.SUCCESS)
+val debugStubV1 = TaskDebug(mode = TaskDebugMode.STUB, stub = TaskRequestDebugStubs.SUCCESS)
 
 val someCreateTask = TaskCreateObject(
     title = "Task1",

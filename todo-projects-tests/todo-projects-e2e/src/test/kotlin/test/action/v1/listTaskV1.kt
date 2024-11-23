@@ -18,7 +18,7 @@ suspend fun <T> Client.listTask(block: (TaskListResponse) -> T): T =
             "v1",
             "task/list",
             TaskListRequest(
-                debug = debug,
+                debug = debugStubV1,
             ).toString()
         ) as TaskListResponse
 

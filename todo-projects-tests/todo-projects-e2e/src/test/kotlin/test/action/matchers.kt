@@ -11,11 +11,4 @@ val beValidId = Matcher<String?> {
     )
 }
 
-val beValidLock = Matcher<String?> {
-    MatcherResult(
-        true, // TODO заменить на it != null, когда заработают локи
-        { "lock should not be null" },
-        { "lock should be null" },
-    )
-}
 

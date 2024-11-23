@@ -5,7 +5,7 @@ import io.kotest.assertions.withClue
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
-import ru.otus.otuskotlin.marketplace.e2e.be.test.action.v1.readTask
+import ru.otus.todo.tests.e2e.test.action.v1.readTask
 import ru.otus.todo.api.v1.models.TaskDebug
 import ru.otus.todo.api.v1.models.TaskResponseObject
 import ru.otus.todo.api.v1.models.TaskStatus

@@ -33,7 +33,7 @@ suspend fun <T> Client.updateTask(task: TaskUpdateObject, block: (TaskUpdateResp
         id should beValidId
         val response = sendAndReceive(
             "task/update", TaskUpdateRequest(
-                debug = debug,
+                debug = debugStubV1,
                 task = task.copy(id = id)
             )
         ) as TaskUpdateResponse
